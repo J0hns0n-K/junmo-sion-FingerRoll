@@ -1,0 +1,31 @@
+# Original handoffs, private links and local-only audit inputs
+/local/
+/private/
+/data/private/
+/data/real/
+/biometrics/
+/consents/
+
+# Credentials, device dumps and runtime databases
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.db
+*.sqlite
+*.sqlite3
+*.bin
+*.fpt
+*.dat
+*.zip
+
+# Dependencies and generated output
+node_modules/
+.venv/
+__pycache__/
+dist/
+coverage/
+.DS_Store
+Thumbs.db

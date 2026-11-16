@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "auditDateKST": "2026-11-16",
+  "runAtUTC": "2026-11-16T11:24:55.170Z",
+  "operator": "Codex AI assistant",
+  "studentAuthorship": "none established",
+  "baselineCommit": "2357563432cacadf47ae720bf5ef4232b2b34f0b",
+  "runtime": "v24.22.1",
+  "archive": {
+    "filename": "Junmo_RoboMetrics_Early_RD_Kickoff_2026-10-27.zip",
+    "sha256": "211136cc54687af919f897fc4d19f86c25ae0365dd49ceadbc2424f56f646b61",
+    "entries": 20,
+    "uncompressedBytes": 46865
+  },
+  "handoff": {
+    "filename": "Junmo_Engineering_EC_Master_Handoff_v2_2026-10-27.md",
+    "sha256": "60472771df326048d8a93020a2d808ec7623d8633159b33c0b8ec7610765e432"
+  },
+  "commands": [
+    {
+      "command": "node --test --test-reporter=tap reference/ai-starter/test/core.test.mjs",
+      "exitCode": 0,
+      "passed": 6,
+      "failed": 0
+    },
+    {
+      "command": "node evidence/starter-baseline/independent-audit.mjs",
+      "exitCode": 0
+    }
+  ],
+  "sources": [
+    {
+      "path": "reference/ai-starter/src/core.mjs",
+      "sha256": "6efb7a36d4abde7c0ea82c5c9bc1aaf51eae01d53c4ed0365f9151d654fc1686",
+      "originalByteIdentical": true,
+      "commitByteIdentical": true
+    },
+    {
+      "path": "reference/ai-starter/src/ui.mjs",
+      "sha256": "1a8bbf9b74105d6e0fcd4cd37820017bc912f79ce58d028f04a521102b43dcdf",
+      "originalByteIdentical": true,
+      "commitByteIdentical": true
+    },
+    {
+      "path": "reference/ai-starter/test/core.test.mjs",
+      "sha256": "b75b834a103758ffbd780d3c842be93189294d6e6600fa46fd0096b66510c795",
+      "originalByteIdentical": true,
+      "commitByteIdentical": true
+    },
+    {
+      "path": "reference/ai-starter/index.html",
+      "sha256": "0750489d4ab45c3e5a87ed6bd40434c6937b6a86ba4e6ec4053f1a49cec234e8",
+      "originalByteIdentical": true,
+      "commitByteIdentical": true
+    },
+    {
+      "path": "reference/ai-starter/styles.css",
+      "sha256": "014e514c2002a7f849de2dfc10c295db6843ada16ed9d9cb6c99da20410a6f39",
+      "originalByteIdentical": true,
+      "commitByteIdentical": true
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/starter-baseline/original-tests.tap",
+      "sha256": "914d700be069338e4dd8de73782c7b136921d069faab327d701badcfcc1177b2"
+    },
+    {
+      "path": "evidence/starter-baseline/independent-audit.mjs",
+      "sha256": "1231508a92769c9346e2e8c5776b9670efa4e8bf2853828048cb5fe50dfde320"
+    },
+    {
+      "path": "evidence/starter-baseline/independent-audit.json",
+      "sha256": "2ef4fd4cc3e090d15d8661236c725a3b806679d5bfc477a0fa589e1d5d0aa183"
+    }
+  ],
+  "findings": {
+    "provenance": "AI-operated audit; robotics reference only; no student work or attendance validation",
+    "gridChecks": {
+      "layouts": 128,
+      "solvable": 51,
+      "unreachable": 77,
+      "algorithms": [
+        "astar",
+        "dijkstra",
+        "greedy"
+      ],
+      "searchResultsChecked": 384
+    },
+    "originalSampleSolvable": 64,
+    "budgetBoundary": {
+      "budget8": {
+        "reason": "BUDGET_EXCEEDED",
+        "expanded": 8
+      },
+      "budget9": {
+        "success": true,
+        "expanded": 9
+      }
+    },
+    "demonstratedLimitation": {
+      "acceptsFractionalPath": true,
+      "malformedPath": [
+        [
+          0,
+          0
+        ],
+        [
+          0.5,
+          0.5
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1.5,
+          1.5
+        ],
+        [
+          2,
+          2
+        ]
+      ]
+    }
+  },
+  "limitations": [
+    "AI-operated robotics reference validation; no student implementation, attendance validation, sensor measurement or deployment evidence",
+    "Exhaustive check is restricted to fixed-endpoint 3x3 four-neighbor unit-cost grids",
+    "verifyPath accepts a demonstrated fractional-coordinate path; original preserved",
+    "UI stale batch/export issue is static code review only; no browser validation",
+    "No LICENSE file supplied; no new license assigned"
+  ]
+}

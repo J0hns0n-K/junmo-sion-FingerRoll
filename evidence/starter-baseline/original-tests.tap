@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: open 3x3 grid: shortest path is Manhattan distance 4
+ok 1 - open 3x3 grid: shortest path is Manhattan distance 4
+  ---
+  duration_ms: 2.0264
+  type: 'test'
+  ...
+# Subtest: blocked goal is unreachable and explicit
+ok 2 - blocked goal is unreachable and explicit
+  ---
+  duration_ms: 0.1478
+  type: 'test'
+  ...
+# Subtest: budget limit is distinguishable from unreachable
+ok 3 - budget limit is distinguishable from unreachable
+  ---
+  duration_ms: 0.111
+  type: 'test'
+  ...
+# Subtest: deterministic map and deterministic search
+ok 4 - deterministic map and deterministic search
+  ---
+  duration_ms: 2.307
+  type: 'test'
+  ...
+# Subtest: A* path is optimal on sampled solvable static grids
+ok 5 - A* path is optimal on sampled solvable static grids
+  ---
+  duration_ms: 7.7319
+  type: 'test'
+  ...
+# Subtest: paired benchmark reproducible and metrics within bounds
+ok 6 - paired benchmark reproducible and metrics within bounds
+  ---
+  duration_ms: 2.0837
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 156.1249
