@@ -20,6 +20,7 @@
 | 2026-11-16 | REF-001 | AI assistant; 원본은 전달된 AI/상담 scaffold | AI reference | 검토된 소스/UI/테스트 5파일을 원문 그대로 격리 반입, 출처 표시 | 원본 AI 참고 자료 사용 | `2357563432cacadf47ae720bf5ef4232b2b34f0b`; reference/ai-starter/ATTRIBUTION.md | 학생 구현 아님; 출석 기능 없음 |
 | 2026-11-16 | AUDIT-001 | AI assistant | AI-authored | 원본 6개 테스트 실행 및 3×3 지도 128개/384개 결과의 별도 BFS 대조, 입력 검증 결함 재현 | 감사 스크립트·실행·해석 모두 AI | evidence/starter-baseline/manifest.json, original-tests.tap, independent-audit.mjs 및 결과 JSON | 경로 탐색 소프트웨어의 제한된 검사이며 출석·센서·학생 실험 증거 아님 |
 | 2026-11-16 | REPO-001 | AI assistant | AI-authored | 요청 이름의 새 비공개 저장소를 로그인된 GitHub Desktop으로 생성하고 로컬 origin 연결 | 전체 설정 AI 수행 | docs/KICKOFF_STATUS.md; 원격 기준 커밋 확인 | GitHub 계정 소유를 학생 코딩으로 간주하지 않음 |
+| 2026-11-16 | REQ-001 | 시간표 제공: 사용자; 문서 편집: AI assistant | AI-authored 문서화, 사용자 제공 요구사항 | 야자 1교시 18:25~19:20, 2교시 19:30~20:20, 3교시 20:30~21:20을 기록 | AI가 저녁 시각을 24시간제로 정리하고 과제 예시에 반영 | docs/ATTENDANCE_DESIGN.md, docs/tasks/TASK_001A.md | 사용자 제공 시각이며 공식 시간표 독립 검증 아님; 사전 허용 범위 미정; 코드 구현·실험 성과 아님 |
 
 ## 학생 작업 기록 양식 — 아직 기록 없음
 
