@@ -1,0 +1,31 @@
+{
+  "dateKST": "2026-11-17",
+  "operator": "Codex AI assistant",
+  "sourceCommit": "cb533127f32f4c0af3ddf13d480d7ed356597889",
+  "sourcePath": "practice/task-001a.mjs",
+  "sourceSha256": "1dc3da10e3072c7910ccb4f71c15d57ddfd36d4762022e699c474523b394dbd7",
+  "studentPrediction": {
+    "question": "Would >= return true for equal timestamps?",
+    "answer": true,
+    "source": "direct user response before AI execution",
+    "scope": "guided prediction only; no independent implementation or rationale claimed"
+  },
+  "observedChecks": [
+    {
+      "case": "equal timestamps, proposed >= comparison",
+      "recognizedAt": "2026-11-17T18:25:00+09:00",
+      "startAt": "2026-11-17T18:25:00+09:00",
+      "actual": true,
+      "currentStrictComparisonResult": false
+    },
+    {
+      "case": "invalid recognition timestamp",
+      "recognizedAt": "not-a-date",
+      "startAt": "2026-11-17T18:25:00+09:00",
+      "actual": false,
+      "limitation": "Current boolean result does not distinguish invalid input from valid on-time input"
+    }
+  ],
+  "decision": "Keep strict > for the on-time equality rule. Invalid-input handling remains student work to be completed.",
+  "limits": "AI ran both checks; student did not run them. No sensor, daily deduplication or final attendance consequences tested."
+}
