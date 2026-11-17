@@ -1,0 +1,101 @@
+{
+  "dateKST": "2026-11-17",
+  "operator": "Codex AI assistant",
+  "codeProvenance": "Student-entered AI-guided exercise; not independent implementation",
+  "baseCommit": "7b9d3774b83bf40ae3b5210fa0f288559bcc4abf",
+  "sourceSnapshot": "evidence/task-001a-guided-03/checked-source.mjs",
+  "sourceSha256": "2543b334402247b29682931b1910f269ae32021799836fc7cf1d8d69c8413e59",
+  "runtime": "v24.22.1",
+  "checksPassed": 9,
+  "cases": [
+    {
+      "name": "before",
+      "recognizedAt": "2026-11-17T18:24:59+09:00",
+      "startAt": "2026-11-17T18:25:00+09:00",
+      "expected": false,
+      "expectedError": null,
+      "actual": false,
+      "error": null,
+      "passed": true
+    },
+    {
+      "name": "equal",
+      "recognizedAt": "2026-11-17T18:25:00+09:00",
+      "startAt": "2026-11-17T18:25:00+09:00",
+      "expected": false,
+      "expectedError": null,
+      "actual": false,
+      "error": null,
+      "passed": true
+    },
+    {
+      "name": "after",
+      "recognizedAt": "2026-11-17T18:25:01+09:00",
+      "startAt": "2026-11-17T18:25:00+09:00",
+      "expected": true,
+      "expectedError": null,
+      "actual": true,
+      "error": null,
+      "passed": true
+    },
+    {
+      "name": "invalid recognition",
+      "recognizedAt": "not-a-date",
+      "startAt": "2026-11-17T18:25:00+09:00",
+      "expected": null,
+      "expectedError": "인식 시각이 올바르지 않습니다.",
+      "error": "인식 시각이 올바르지 않습니다.",
+      "passed": true
+    },
+    {
+      "name": "invalid start",
+      "recognizedAt": "2026-11-17T18:25:00+09:00",
+      "startAt": "not-a-date",
+      "expected": null,
+      "expectedError": "시작 시각이 올바르지 않습니다.",
+      "error": "시작 시각이 올바르지 않습니다.",
+      "passed": true
+    },
+    {
+      "name": "null recognition",
+      "recognizedAt": null,
+      "startAt": "2026-11-17T18:25:00+09:00",
+      "expected": null,
+      "expectedError": "인식 시각과 시작 시각을 모두 입력해주세요.",
+      "error": "인식 시각과 시작 시각을 모두 입력해주세요.",
+      "passed": true
+    },
+    {
+      "name": "null start",
+      "recognizedAt": "2026-11-17T18:25:00+09:00",
+      "startAt": null,
+      "expected": null,
+      "expectedError": "인식 시각과 시작 시각을 모두 입력해주세요.",
+      "error": "인식 시각과 시작 시각을 모두 입력해주세요.",
+      "passed": true
+    },
+    {
+      "name": "missing recognition",
+      "recognizedAt": {
+        "type": "undefined"
+      },
+      "startAt": "2026-11-17T18:25:00+09:00",
+      "expected": null,
+      "expectedError": "인식 시각과 시작 시각을 모두 입력해주세요.",
+      "error": "인식 시각과 시작 시각을 모두 입력해주세요.",
+      "passed": true
+    },
+    {
+      "name": "missing start",
+      "recognizedAt": "2026-11-17T18:25:00+09:00",
+      "startAt": {
+        "type": "undefined"
+      },
+      "expected": null,
+      "expectedError": "인식 시각과 시작 시각을 모두 입력해주세요.",
+      "error": "인식 시각과 시작 시각을 모두 입력해주세요.",
+      "passed": true
+    }
+  ],
+  "limits": "Nine specified synthetic cases only; type/strict timestamp format validation incomplete. No student-authored test, daily storage, exception review or sensor validation claimed."
+}

@@ -27,6 +27,8 @@
 
 현재 [JavaScript 연습 파일](practice/task-001a.mjs)은 학생이 **AI가 제시한 줄을 따라 입력하고 검토받는 연습**이다. 시각 변환·비교·반환에 두 시각의 날짜 변환 실패 검사까지 추가했다. 최초 경계 세 사례는 false·false·true였고 [기록](evidence/task-001a-guided-01/result.json), 이후 두 오류 입력을 포함한 다섯 사례도 기대 결과를 확인했다 [기록](evidence/task-001a-guided-02/result.json). 독립적인 학생 알고리즘 구현으로 계산하지 않는다. 입력 누락·타입·형식 검증은 미완성이며 날짜별 한 건 저장·예외 확인·센서 연결은 미구현이다. 기존 Node.js 환경을 사용하므로 별도 설치는 필요 없다.
 
+후속 연습에서 null·undefined 누락 검사도 추가해 AI가 확인한 지정 사례는 **9개**다 [기록](evidence/task-001a-guided-03/result.json). 이제 누락 검사는 있으며 타입·엄격한 시각 형식 검증은 여전히 미완성이다. [테스트 연습 파일](practice/task-001a.test.mjs)은 AI가 작성한 정각 사례 한 개를 제공한다. 학생이 직접 고른 사례의 테스트 작성·설명은 아직 수행 대기다. 이 단계는 안내 연습이며 전체 Task 001A 완료나 센서 검증이 아니다.
+
 ## 기록과 다음 단계
 
 - [원본 출처 및 참고 코드 검토](docs/REFERENCE_AUDIT.md)
