@@ -1,0 +1,35 @@
+{
+  "dateKST": "2026-11-17",
+  "operator": "Codex AI assistant",
+  "codeProvenance": "AI-provided lines entered by student in guided practice; no independent student implementation claimed",
+  "baseCommit": "c7dd2923189d2dc5eac3911742822ca01f4f0fde",
+  "sourceSnapshot": "evidence/task-001a-guided-01/checked-source.mjs",
+  "sourceSha256": "627ba2d012a523fd340f4d4d4826e8277ed67eea73e58fd1a847ccbf1ef76bb3",
+  "runtime": "v24.22.1",
+  "cases": [
+    {
+      "recognizedAt": "2026-11-17T18:24:59+09:00",
+      "startAt": "2026-11-17T18:25:00+09:00",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "recognizedAt": "2026-11-17T18:25:00+09:00",
+      "startAt": "2026-11-17T18:25:00+09:00",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "recognizedAt": "2026-11-17T18:25:01+09:00",
+      "startAt": "2026-11-17T18:25:00+09:00",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    }
+  ],
+  "passed": 3,
+  "scope": "Only valid timestamp inputs around the 18:25 boundary; false is not a final attendance decision; exceptions, invalid input, daily storage and sensors not verified",
+  "snapshotHeaderNote": "Snapshot preserves the exact saved file, including the original template comments; current practice file comments clarify guided authorship."
+}
