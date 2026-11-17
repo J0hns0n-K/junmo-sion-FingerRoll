@@ -1,0 +1,81 @@
+{
+  "dateKST": "2026-11-17",
+  "operator": "Codex AI assistant",
+  "codeProvenance": "Student entered AI-provided and AI-reviewed guided exercise; not independent implementation",
+  "baseCommit": "73dcff52215303b7797674198bd2b8e6b7d2e90f",
+  "sourceSnapshot": "evidence/task-001a-guided-02/checked-source.mjs",
+  "sourceSha256": "b57bc0478966bb19146014cda12c0476700d032f2dc8de88fa3a717dc8c42af7",
+  "runtime": "v24.22.1",
+  "mainChecks": [
+    {
+      "name": "before",
+      "recognizedAt": "2026-11-17T18:24:59+09:00",
+      "startAt": "2026-11-17T18:25:00+09:00",
+      "expected": false,
+      "expectedError": null,
+      "result": false,
+      "error": null,
+      "passed": true
+    },
+    {
+      "name": "equal",
+      "recognizedAt": "2026-11-17T18:25:00+09:00",
+      "startAt": "2026-11-17T18:25:00+09:00",
+      "expected": false,
+      "expectedError": null,
+      "result": false,
+      "error": null,
+      "passed": true
+    },
+    {
+      "name": "after",
+      "recognizedAt": "2026-11-17T18:25:01+09:00",
+      "startAt": "2026-11-17T18:25:00+09:00",
+      "expected": true,
+      "expectedError": null,
+      "result": true,
+      "error": null,
+      "passed": true
+    },
+    {
+      "name": "invalid recognition",
+      "recognizedAt": "not-a-date",
+      "startAt": "2026-11-17T18:25:00+09:00",
+      "expected": null,
+      "expectedError": "인식 시각이 올바르지 않습니다.",
+      "error": "인식 시각이 올바르지 않습니다.",
+      "passed": true
+    },
+    {
+      "name": "invalid start",
+      "recognizedAt": "2026-11-17T18:25:00+09:00",
+      "startAt": "not-a-date",
+      "expected": null,
+      "expectedError": "시작 시각이 올바르지 않습니다.",
+      "error": "시작 시각이 올바르지 않습니다.",
+      "passed": true
+    }
+  ],
+  "mainChecksPassed": 5,
+  "knownLimitProbes": [
+    {
+      "name": "null recognition",
+      "recognizedAt": null,
+      "startAt": "2026-11-17T18:25:00+09:00",
+      "result": false,
+      "error": null,
+      "required": "Reject missing time instead of returning a normal boolean",
+      "unresolved": true
+    },
+    {
+      "name": "null start",
+      "recognizedAt": "2026-11-17T18:25:00+09:00",
+      "startAt": null,
+      "result": true,
+      "error": null,
+      "required": "Reject missing time instead of returning a normal boolean",
+      "unresolved": true
+    }
+  ],
+  "scope": "Five specified cases pass. Null input is still accepted as 1970-01-01; missing/type/format validation incomplete. No daily storage, exception review or sensor validation."
+}
