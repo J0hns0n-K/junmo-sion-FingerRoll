@@ -1,0 +1,18 @@
+{
+  "dateKST": "2026-11-18",
+  "status": "selected; test implementation and execution pending",
+  "userResponse": "6시 26분 true",
+  "recognizedLocalTime": "18:26:00",
+  "startLocalTime": "18:25:00",
+  "timeZone": "Asia/Seoul",
+  "expectedNeedsReview": true,
+  "provenance": {
+    "timeAndExpectedResult": "Selected by the user after guided teaching about the 18:25 rule",
+    "24HourInterpretation": "AI interpreted the response in the established evening-study context",
+    "fixtureDate": "Not selected by the user; any date used in code remains a synthetic fixture",
+    "codeTemplateAndExecution": "AI guidance and future execution must be attributed separately",
+    "independentImplementation": "Not established",
+    "userRationale": "No explanation supplied beyond the chosen time and true"
+  },
+  "scope": "Synthetic case selection only; true requests exception review and does not confirm final lateness, daily storage, sensor accuracy or attendance."
+}
