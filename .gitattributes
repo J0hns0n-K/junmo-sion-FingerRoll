@@ -6,3 +6,5 @@
 *.json text eol=lf
 *.csv text eol=lf
 *.tap text eol=lf
+# Preserve Node's raw diagnostic indentation, including indented blank lines.
+evidence/task-001a-test-control-01/failure.tap -whitespace
