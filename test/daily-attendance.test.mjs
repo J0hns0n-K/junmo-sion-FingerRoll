@@ -1,0 +1,208 @@
+// AI-authored tests with synthetic IDs/times; no student implementation claim.
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { mkdtempSync, unlinkSync, rmdirSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { spawn } from 'node:child_process';
+import { openAttendanceStore } from '../src/daily-attendance.mjs';
+
+function memory(t) {
+    const store = openAttendanceStore(':memory:');
+    t.after(() => store.close());
+    return store;
+}
+
+function fileDatabase(t) {
+    const directory = mkdtempSync(join(tmpdir(), 'fingerroll-synthetic-'));
+    const databasePath = join(directory, 'attendance.sqlite');
+    t.after(() => {
+        // Delete only these known temporary files; no recursive deletion.
+        for (const suffix of ['', '-journal', '-wal', '-shm']) {
+            try { unlinkSync(databasePath + suffix); }
+            catch (error) { if (error.code !== 'ENOENT') throw error; }
+        }
+        rmdirSync(directory);
+    });
+    return databasePath;
+}
+
+test('최초 출석은 원 시각과 UTC 시각을 저장한다', t => {
+    const store = memory(t);
+    const result = store.recordCheckIn({ studentId: 'S001', recognizedAt: '2026-11-18T18:20:00+09:00' });
+    assert.equal(result.created, true);
+    assert.deepEqual(result.record, {
+        studentId: 'S001', attendanceDate: '2026-11-18',
+        firstRecognizedAt: '2026-11-18T18:20:00+09:00',
+        firstRecognizedAtUtc: '2026-11-18T09:20:00.000Z', status: 'present',
+    });
+});
+
+test('정상 출석 뒤 늦은 재인식은 최초 시각과 상태를 유지한다', t => {
+    const store = memory(t);
+    const first = store.recordCheckIn({ studentId: 'S001', recognizedAt: '2026-11-18T18:20:00+09:00' });
+    const again = store.recordCheckIn({ studentId: 'S001', recognizedAt: '2026-11-18T22:00:00+09:00' });
+    assert.equal(again.created, false);
+    assert.deepEqual(again.record, first.record);
+    assert.equal(store.listForDate('2026-11-18').length, 1);
+});
+
+test('늦은 첫 출석도 확정 지각이 아닌 사유 확인 필요다', t => {
+    const store = memory(t);
+    const result = store.recordCheckIn({ studentId: 'S001', recognizedAt: '2026-11-18T18:26:00+09:00' });
+    assert.equal(result.record.status, 'review_required');
+});
+
+test('나중에 도착한 과거 시각 이벤트도 최초 수락 기록을 덮어쓰지 않는다', t => {
+    const store = memory(t);
+    const first = store.recordCheckIn({ studentId: 'S001', recognizedAt: '2026-11-18T18:26:00+09:00' });
+    const outOfOrder = store.recordCheckIn({ studentId: 'S001', recognizedAt: '2026-11-18T18:20:00+09:00' });
+    assert.equal(outOfOrder.created, false);
+    assert.deepEqual(outOfOrder.record, first.record);
+});
+
+test('같은 순간의 다른 시간대 표기는 중복 출석이다', t => {
+    const store = memory(t);
+    const first = store.recordCheckIn({ studentId: 'S001', recognizedAt: '2026-11-18T18:26:00+09:00' });
+    const again = store.recordCheckIn({ studentId: 'S001', recognizedAt: '2026-11-18T09:26:00Z' });
+    assert.equal(again.created, false);
+    assert.deepEqual(again.record, first.record);
+});
+
+test('서로 다른 학생은 같은 날짜에도 각각 기록한다', t => {
+    const store = memory(t);
+    for (const studentId of ['S001', 'S002']) {
+        assert.equal(store.recordCheckIn({ studentId, recognizedAt: '2026-11-18T18:20:00+09:00' }).created, true);
+    }
+    assert.equal(store.listForDate('2026-11-18').length, 2);
+});
+
+test('한국 자정 전후는 같은 UTC 날짜라도 별도 출석이다', t => {
+    const store = memory(t);
+    const before = store.recordCheckIn({ studentId: 'S001', recognizedAt: '2026-11-18T14:59:59.999Z' });
+    const after = store.recordCheckIn({ studentId: 'S001', recognizedAt: '2026-11-18T15:00:00Z' });
+    assert.equal(before.record.attendanceDate, '2026-11-18');
+    assert.equal(before.record.status, 'review_required');
+    assert.equal(after.record.attendanceDate, '2026-11-19');
+    assert.equal(after.record.status, 'present');
+    assert.equal(after.created, true);
+    assert.equal(store.listForDate('2026-11-18').length, 1);
+    assert.equal(store.listForDate('2026-11-19').length, 1);
+});
+
+for (const [time, status] of [
+    ['00:00:00', 'present'], ['18:09:59', 'present'], ['18:25:00', 'present'],
+    ['18:25:00.001', 'review_required'], ['23:59:59.999', 'review_required'],
+]) {
+    test(`시간 제한 없이 기록: ${time}`, t => {
+        const store = memory(t);
+        const result = store.recordCheckIn({ studentId: 'S001', recognizedAt: `2026-11-18T${time}+09:00` });
+        assert.equal(result.created, true);
+        assert.equal(result.record.status, status);
+    });
+}
+
+test('잘못된 입력은 기록이나 당일 기회를 만들지 않는다', t => {
+    const store = memory(t);
+    for (const recognizedAt of [0, null, 'not-a-date', '2026-11-18T18:20:00', '2026-02-29T18:20:00Z']) {
+        assert.throws(() => store.recordCheckIn({ studentId: 'S001', recognizedAt }));
+    }
+    assert.equal(store.listForDate('2026-11-18').length, 0);
+    assert.equal(store.recordCheckIn({ studentId: 'S001', recognizedAt: '2026-11-18T18:20:00+09:00' }).created, true);
+});
+
+test('잘못된 중복 이벤트를 거부해도 최초 기록은 유지한다', t => {
+    const store = memory(t);
+    const first = store.recordCheckIn({ studentId: 'S001', recognizedAt: '2026-11-18T18:20:00+09:00' });
+    assert.throws(() => store.recordCheckIn({ studentId: 'S001', recognizedAt: false }));
+    assert.deepEqual(store.getAttendance({ studentId: 'S001', attendanceDate: '2026-11-18' }), first.record);
+});
+
+test('가명 학생 ID 입력을 검증한다', t => {
+    const store = memory(t);
+    for (const studentId of [null, 1, '', ' S001', 'S001 ', 'S001\n', '학생 이름', 'A'.repeat(65), "S001'; DROP TABLE daily_attendance;--"]) {
+        assert.throws(() => store.recordCheckIn({ studentId, recognizedAt: '2026-11-18T18:20:00+09:00' }));
+    }
+    assert.equal(store.listForDate('2026-11-18').length, 0);
+});
+
+test('조회만으로 미확인 학생의 결석 기록을 생성하지 않는다', t => {
+    const store = memory(t);
+    assert.equal(store.getAttendance({ studentId: 'S001', attendanceDate: '2026-11-18' }), null);
+    assert.deepEqual(store.listForDate('2026-11-18'), []);
+});
+
+test('조회 날짜도 실제 달력 날짜여야 한다', t => {
+    const store = memory(t);
+    for (const date of [null, '2026-02-29', '2026-11-18\n', '0000-01-01']) {
+        assert.throws(() => store.listForDate(date));
+    }
+});
+
+test('저장 범위 밖 기원전 날짜는 기록하지 않는다', t => {
+    const store = memory(t);
+    assert.throws(() => store.recordCheckIn({ studentId: 'S001', recognizedAt: '0000-01-01T00:00:00Z' }), /0001~9999/);
+    assert.deepEqual(store.listForDate('2026-11-18'), []);
+});
+
+test('호출자가 반환값을 수정해 저장 기록을 바꿀 수 없다', t => {
+    const store = memory(t);
+    const first = store.recordCheckIn({ studentId: 'S001', recognizedAt: '2026-11-18T18:20:00+09:00' });
+    assert.throws(() => { first.record.status = 'review_required'; }, TypeError);
+    assert.throws(() => { store.listForDate('2026-11-18').push({}); }, TypeError);
+    assert.equal(store.getAttendance({ studentId: 'S001', attendanceDate: '2026-11-18' }).status, 'present');
+});
+
+test('닫힌 저장소는 작업을 거부하고 여러 번 닫기는 허용한다', () => {
+    const store = openAttendanceStore(':memory:');
+    store.close();
+    store.close();
+    assert.throws(() => store.listForDate('2026-11-18'), /닫혔/);
+});
+
+test('파일을 닫고 다시 열어도 중복 방지와 최초 기록이 유지된다', t => {
+    const databasePath = fileDatabase(t);
+    const firstStore = openAttendanceStore(databasePath);
+    let first;
+    try { first = firstStore.recordCheckIn({ studentId: 'S001', recognizedAt: '2026-11-18T18:20:00+09:00' }); }
+    finally { firstStore.close(); }
+    const secondStore = openAttendanceStore(databasePath);
+    try {
+        const again = secondStore.recordCheckIn({ studentId: 'S001', recognizedAt: '2026-11-18T22:00:00+09:00' });
+        assert.equal(again.created, false);
+        assert.deepEqual(again.record, first.record);
+    } finally { secondStore.close(); }
+});
+
+test('여러 프로세스가 같은 날 동시에 기록해도 한 건만 생성한다', async t => {
+    const databasePath = fileDatabase(t);
+    openAttendanceStore(databasePath).close();
+    const moduleUrl = new URL('../src/daily-attendance.mjs', import.meta.url).href;
+    const script = `
+        import {openAttendanceStore} from ${JSON.stringify(moduleUrl)};
+        const store=openAttendanceStore(process.argv[1]);
+        try { console.log(JSON.stringify(store.recordCheckIn({studentId:'S001',recognizedAt:process.argv[2]}))); }
+        finally { store.close(); }
+    `;
+    const jobs = ['18:20:00', '18:21:00', '18:26:00', '19:00:00'].map(time => new Promise((resolve, reject) => {
+        const child = spawn(process.execPath, ['--input-type=module', '-e', script, databasePath, `2026-11-18T${time}+09:00`], { windowsHide: true });
+        let stdout = '', stderr = '';
+        child.stdout.on('data', data => { stdout += data; });
+        child.stderr.on('data', data => { stderr += data; });
+        child.once('error', reject);
+        child.once('close', code => {
+            if (code !== 0) return reject(new Error(stderr));
+            try { resolve(JSON.parse(stdout)); } catch (error) { reject(error); }
+        });
+    }));
+    // Wait for every worker to close before cleanup, even if one worker fails.
+    const settled = await Promise.allSettled(jobs);
+    const failed = settled.find(result => result.status === 'rejected');
+    if (failed) throw failed.reason;
+    const results = settled.map(result => result.value);
+    assert.equal(results.filter(result => result.created).length, 1);
+    for (const result of results) assert.deepEqual(result.record, results[0].record);
+    const store = openAttendanceStore(databasePath);
+    try { assert.equal(store.listForDate('2026-11-18').length, 1); }
+    finally { store.close(); }
+});

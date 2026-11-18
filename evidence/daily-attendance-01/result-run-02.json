@@ -1,0 +1,48 @@
+{
+  "dateKST": "2026-11-18",
+  "operator": "Codex AI assistant",
+  "authorship": "Daily store, new tests and demo are AI-authored under user continuation of AI implementation",
+  "baseCommit": "882bcc34174b7996fe584f845ed95b9ed14e0c5d",
+  "runtime": "v24.22.1",
+  "command": "node --test --test-reporter=tap practice/task-001a.test.mjs practice/task-001a.validation.test.mjs test/daily-attendance.test.mjs",
+  "exitCode": 0,
+  "tests": 89,
+  "passed": 89,
+  "failed": 0,
+  "sources": [
+    {
+      "path": "src/timestamp.mjs",
+      "sha256": "06ab372ee671f887719bce2bf72a8e84466286ff8c969d1b7ae1107a4eb109c4"
+    },
+    {
+      "path": "src/daily-attendance.mjs",
+      "sha256": "b9a431b6e22868a1a56a1af2ad5eb68ee25a5238dab970fa1ef90823ab28ba18"
+    },
+    {
+      "path": "practice/task-001a.mjs",
+      "sha256": "9e850b804e55867ee69dffb5a2a6521e6cc1646347c6fe94348acbfc5c19b380"
+    },
+    {
+      "path": "practice/task-001a.test.mjs",
+      "sha256": "13e9b7b722dea1da9bb0d98cbee2d56a4374fe4153d3e881368eeb5c9fdb4bef"
+    },
+    {
+      "path": "practice/task-001a.validation.test.mjs",
+      "sha256": "c52fa69adc7304110cb55609dbd8cd23bd5a1bf846e136dffb930f73d26a7ff1"
+    },
+    {
+      "path": "test/daily-attendance.test.mjs",
+      "sha256": "df219ed7c0a75867cd99b7c9480d033befd4c115db5bce0cda7ba384ec945c0b"
+    },
+    {
+      "path": "scripts/demo-attendance.mjs",
+      "sha256": "4b409b073856bcd5d70febb36f76714e9fbfbac41f92c41cbf2e40251c5276b4"
+    }
+  ],
+  "output": {
+    "path": "run-02.tap",
+    "sha256": "077bb220a79dd75a29a23e1c28d7cbb293fafcb5839184baeca73ad5584c40c2"
+  },
+  "coverage": "Prior 67 checks plus 22 daily-store cases: Korean midnight, immutable first accepted record, invalid inputs, restart persistence and four concurrent processes with one shared database",
+  "limits": "Synthetic local prototype on this Node runtime; not production load, student independent implementation, biometric validation or school deployment. No roster authority, reason review, authentication or outbound notifications."
+}

@@ -8,3 +8,6 @@
 *.tap text eol=lf
 # Preserve Node's raw diagnostic indentation, including indented blank lines.
 evidence/task-001a-test-control-01/failure.tap -whitespace
+evidence/daily-attendance-01/failed-01.tap -whitespace
+evidence/daily-attendance-01/*.tap -text
+evidence/daily-attendance-01/*.txt -text

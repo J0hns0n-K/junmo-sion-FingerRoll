@@ -1,0 +1,15 @@
+{
+  "dateKST": "2026-11-18",
+  "operator": "Codex AI assistant",
+  "tests": 88,
+  "passed": 71,
+  "failed": 17,
+  "exitCode": 1,
+  "output": "failed-01.tap",
+  "outputSha256": "8bb828a8239c4a0ed65d3753275d1b45055fbc070a7ef7fd9a36aefd1a101aac",
+  "sourceSnapshot": "failed-source-01.txt",
+  "sourceSha256": "ee81126656558ec3a0d85264e7303145bb787e37d3fbb4a9ad9817feb06ceccd",
+  "cause": "Intl.DateTimeFormat with calendar iso8601 omitted era in this Node runtime; AD check rejected valid dates",
+  "fix": "Use explicit Gregorian calendar with era and verify unsupported BC input is still rejected",
+  "attribution": "AI implementation defect caught by AI-run tests, not a student discovery"
+}
