@@ -31,6 +31,8 @@
 
 ## 기록과 다음 단계
 
+2026-11-18 테스트 연습에서는 학생이 AI 안내대로 예시를 18:20으로 바꾸고, 예상값만 true로 바꿔 실패시킨 뒤 false로 복원했다. AI가 함수 코드가 동일하고 예상값만 달라졌음을 확인했으며 복원 후 테스트 한 건이 통과했다. [통제 실험 기록](evidence/task-001a-test-control-01/restored-result.json). 이는 안내 연습이며 학생이 직접 고른 새 사례의 테스트 작성은 아직 대기 중이다.
+
 - [원본 출처 및 참고 코드 검토](docs/REFERENCE_AUDIT.md)
 - [기여 기록과 저자 구분](docs/CONTRIBUTION_LOG.md)
 - [출석 규칙·구조 및 검증 계획](docs/ATTENDANCE_DESIGN.md)

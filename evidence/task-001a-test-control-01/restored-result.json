@@ -1,0 +1,22 @@
+{
+  "dateKST": "2026-11-18",
+  "operator": "Codex AI assistant",
+  "command": "node --test practice/task-001a.test.mjs",
+  "observedExitCode": 0,
+  "tests": 1,
+  "passed": 1,
+  "failed": 0,
+  "recognizedAt": "2026-11-17T18:20:00+09:00",
+  "startAt": "2026-11-17T18:25:00+09:00",
+  "actual": false,
+  "expected": false,
+  "functionUnchangedAcrossControl": true,
+  "onlyExpectedValueChangedAcrossControl": true,
+  "sourceSha256": "2543b334402247b29682931b1910f269ae32021799836fc7cf1d8d69c8413e59",
+  "testSha256": "4121e440d72b364d8f3f863fa2fd7c63087dfb107502d4cf95adc34952713238",
+  "testSnapshot": "restored-test-source.txt",
+  "baseCommit": "2c256e4ee6dcdb4a818299385a83afaf9b91f673",
+  "codeProvenance": "Student restored the AI-provided expected value after guided deliberate-failure exercise; not independent test design",
+  "snapshotNote": "Exact source at successful execution, before current test attribution comments are updated",
+  "limits": "One guided synthetic test. Student execution, independent case design, full task and sensor behavior not established."
+}
