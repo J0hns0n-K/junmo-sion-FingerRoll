@@ -30,7 +30,11 @@
 3. [Contribution Log](CONTRIBUTION_LOG.md), [출석 설계](ATTENDANCE_DESIGN.md), [개인정보·동의·보안 게이트](PRIVACY_SECURITY.md), [Report·EC 증빙 계획](EVIDENCE_PLAN.md) 작성.
 4. 학생 첫 과제 [Task 001A](tasks/TASK_001A.md) 정의. 학생이 직접 설계·함수·테스트·설명을 작성할 차례이며 정답 함수는 이번 세션에서 구현하지 않음.
 
-이번 Git 커밋의 작성자는 `Codex AI Assistant`로 명시한다. `codex-ai@localhost`는 저자를 AI로 구분하는 로컬 표기용 주소이며 학생이나 실제 GitHub 계정의 이메일이라고 주장하지 않는다. GitHub 푸시 계정은 실제 작업 수행자의 증거를 대체하지 않는다.
+초기 커밋은 AI 수행을 구분하려고 `Codex AI Assistant <codex-ai@localhost>`로 작성했다. 이 표기용 주소는 학생이나 실제 GitHub 계정의 이메일이 아니다.
+
+2026-11-18 사용자 요청으로 **새 커밋의 계정 표시를 개인 GitHub `J0hns0n-K`로 설정**했다. 이 저장소의 로컬 설정은 `user.name=J0hns0n-K`, `user.email=204707153+J0hns0n-K@users.noreply.github.com`이다. 명령마다 Codex 작성자를 지정하던 방식을 중단하고 저장소 기본 설정을 사용한다. 개인 메일 대신 GitHub ID 기반 noreply 주소를 사용하며 다른 저장소의 전역 설정은 변경하지 않았다. 이전 커밋의 작성자와 SHA는 이 설정 변경으로 소급 수정하지 않았다. 실제 AI/학생 수행 내용은 커밋 본문과 기여 로그로 계속 구분한다.
+
+설정 근거: [GitHub 커밋 이메일 설정](https://docs.github.com/en/account-and-profile/how-tos/email-preferences/setting-your-commit-email-address), [ID 기반 noreply 형식](https://docs.github.com/en/account-and-profile/reference/email-addresses-reference).
 
 ## 아직 완료하지 않은 항목
 
