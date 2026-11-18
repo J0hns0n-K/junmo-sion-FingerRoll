@@ -1,0 +1,34 @@
+{
+  "dateKST": "2026-11-18",
+  "operator": "Codex AI assistant",
+  "baseCommit": "8b318fb326066b1daed3d8b64de4487c5db4fd21",
+  "sourceSha256": "2543b334402247b29682931b1910f269ae32021799836fc7cf1d8d69c8413e59",
+  "testSha256": "20546e228cc7897d17604a9fdff560962be4973357ea227f8e32340987865a1d",
+  "probes": [
+    {
+      "name": "number",
+      "value": 0,
+      "accepted": true,
+      "result": false
+    },
+    {
+      "name": "boolean",
+      "value": true,
+      "accepted": true,
+      "result": false
+    },
+    {
+      "name": "timezone missing",
+      "value": "2026-11-17T18:25:00",
+      "accepted": true,
+      "result": false
+    },
+    {
+      "name": "invalid calendar date",
+      "value": "2026-02-29T18:25:00+09:00",
+      "accepted": true,
+      "result": false
+    }
+  ],
+  "workingTreeNote": "Existing test has one standalone ㄹ identifier compared with HEAD. Preserved before cleanup; no other user changes found."
+}

@@ -1,0 +1,41 @@
+{
+  "dateKST": "2026-11-18",
+  "operator": "Codex AI assistant",
+  "authorization": "Continuation of explicit user request for AI implementation",
+  "baseCommit": "8b318fb326066b1daed3d8b64de4487c5db4fd21",
+  "runtime": "v24.22.1",
+  "command": "node --test --test-reporter=tap practice/task-001a.test.mjs practice/task-001a.validation.test.mjs",
+  "exitCode": 0,
+  "tests": 67,
+  "passed": 67,
+  "failed": 0,
+  "summarySource": "Observed Node TAP output from the verification run in this session",
+  "breakdown": {
+    "existingBoundaryTests": 3,
+    "newValidCases": 12,
+    "invalidKinds": 26,
+    "invalidArgumentPositions": 2,
+    "newInvalidChecks": 52
+  },
+  "sources": [
+    {
+      "path": "practice/task-001a.mjs",
+      "sha256": "c5550fcae5ac6d272db1ad1876b0110f3659759fbaa03026a61a4776540141f6"
+    },
+    {
+      "path": "practice/task-001a.test.mjs",
+      "sha256": "13e9b7b722dea1da9bb0d98cbee2d56a4374fe4153d3e881368eeb5c9fdb4bef"
+    },
+    {
+      "path": "practice/task-001a.validation.test.mjs",
+      "sha256": "c52fa69adc7304110cb55609dbd8cd23bd5a1bf846e136dffb930f73d26a7ff1"
+    }
+  ],
+  "authorship": {
+    "implementation": "AI-authored strict input validation replacing earlier AI-guided student-entered implementation",
+    "newTests": "AI-authored",
+    "existingUserSelection": "18:26 and expected true were user-selected; existing code provenance retained"
+  },
+  "before": "before.json",
+  "limits": "Synthetic time-comparison tests only. Not independent student implementation, exhaustive date parsing proof, daily attendance storage, final late classification, sensor testing or school deployment."
+}

@@ -23,9 +23,9 @@
 
 ## 첫 학생 과제
 
-[Task 001A — 단일 교시의 정각·지각 경계 판정](docs/tasks/TASK_001A.md)은 아직 전체 완료하지 않았다. [연습 함수](practice/task-001a.mjs)는 학생이 AI 제공 코드를 입력하고 검토받은 안내 연습이다. 시각 변환·비교·반환과 날짜 변환 실패·null/undefined 누락 검사가 있으며, AI가 확인한 지정 합성 사례는 [9개](evidence/task-001a-guided-03/result.json)다. 타입·엄격한 시각 형식 검증은 미완성이며 날짜별 한 건 저장·예외 확인·센서 연결은 미구현이다. 독립적인 학생 알고리즘 구현으로 계산하지 않는다.
+[Task 001A — 단일 교시의 정각·지각 경계 판정](docs/tasks/TASK_001A.md)은 안내 연습에서 시작했고, 이후 사용자의 AI 구현 요청에 따라 [시각 비교 함수](practice/task-001a.mjs)의 타입·시간대·달력 검증을 AI가 보완했다. [입력 형식과 범위](docs/TIMESTAMP_INPUT.md). 이전 안내 연습 소스와 [9개 사례 기록](evidence/task-001a-guided-03/result.json)은 보존한다. 현재 기능과 검사는 AI 작성으로 구분하며 학생의 독립 구현이나 전체 출석 시스템 완성으로 계산하지 않는다.
 
-현재 [테스트 파일](practice/task-001a.test.mjs)은 아래 **3건 통과**다. [이번 실행 기록](evidence/task-001a-ai-equality-01/result.json). 기존 Node.js 환경을 사용하므로 별도 설치는 필요 없다.
+현재 아래 기존 [3개 테스트](practice/task-001a.test.mjs)와 추가 [입력 검증 테스트](practice/task-001a.validation.test.mjs)를 합쳐 **67개 통과, 실패 0개**다. [현재 결과와 소스 해시](evidence/task-001a-strict-input-01/result.json). 별도 설치는 필요 없다.
 
 | 인식 시각 | 예상·실제 결과 | 기여 구분 |
 |---|---|---|
@@ -33,11 +33,11 @@
 | 18:26 | true | 시각·예상값은 사용자 선택, 코드 안내는 AI, 입력은 학생 |
 | 18:25 정각 | false | 사용자의 명시적 요청으로 AI가 직접 추가 |
 
-실행 확인은 모두 AI가 수행했다. true는 사유 확인 필요를 의미하며 최종 지각 확정이 아니다. 위 3개 테스트와 앞선 9개 진단 사례는 겹치는 범위가 있어 독립적인 12개 검사로 합산하지 않는다.
+실행 확인은 모두 AI가 수행했다. true는 사유 확인 필요를 의미하며 최종 지각 확정이 아니다. 67개에는 기존 3개가 포함되며, 앞선 9개 진단과도 겹치므로 과거 검사 수를 누적해 독립 사례 수로 주장하지 않는다.
 
 ## 기록과 다음 단계
 
-사용자의 [18:26 사례 선택과 검증](evidence/task-001a-user-selected-case-01/verification.json), 예상값만 바꿔 의도적 실패를 확인한 뒤 복원한 [통제 연습](evidence/task-001a-test-control-01/restored-result.json)을 보존했다. 실제 다음 구현 범위는 입력 타입·시각 형식 검증과 날짜별 한 건 저장이다. 전체 과제·센서 검증·독립 구현 성과로 확대하지 않는다.
+사용자의 [18:26 사례 선택과 검증](evidence/task-001a-user-selected-case-01/verification.json), 예상값만 바꿔 의도적 실패를 확인한 뒤 복원한 [통제 연습](evidence/task-001a-test-control-01/restored-result.json)을 보존했다. 다음 구현 범위는 한국 날짜별 한 건 저장과 중복 방지다. 명단·사유 확인·센서·알림은 미구현이며 학교 운영·학생 독립 구현 성과로 확대하지 않는다.
 
 - [원본 출처 및 참고 코드 검토](docs/REFERENCE_AUDIT.md)
 - [기여 기록과 저자 구분](docs/CONTRIBUTION_LOG.md)
