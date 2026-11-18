@@ -1,5 +1,6 @@
 // AI-provided code entered by the student under guidance, 2026-11-18 KST.
 // Case 1 time/expectation: AI. Case 2 time (18:26) and expectation (true): user.
+// Case 3 (equal to start): AI-authored at the user's explicit request.
 // Synthetic date and test code: AI. This is not independent implementation or task completion.
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -18,4 +19,10 @@ test('18시 20분은 사유 확인 대상이 아니다 - 안내 연습', () => {
 test('18시 26분은 사유 확인이 필요하다', () => {
     const result = classifyTime('2026-11-17T18:26:00+09:00', startAt);
     assert.equal(result, true);
+});
+
+// AI 작성: 사용자가 정각 테스트 추가를 직접 요청했습니다.
+test('18시 25분 정각은 사유 확인 대상이 아니다', () => {
+    const result = classifyTime('2026-11-17T18:25:00+09:00', startAt);
+    assert.equal(result, false);
 });

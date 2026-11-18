@@ -1,0 +1,44 @@
+{
+  "dateKST": "2026-11-18",
+  "operator": "Codex AI assistant",
+  "authorization": "User explicitly requested AI to add the equality test: 너가 해",
+  "baseCommit": "f6ca2eea4361ef90419f2dca8e4c9b8237a3b09b",
+  "runtime": "v24.22.1",
+  "command": "node --test --test-reporter=tap practice/task-001a.test.mjs",
+  "exitCode": 0,
+  "tests": 3,
+  "passed": 3,
+  "failed": 0,
+  "cases": [
+    {
+      "time": "18:20:00",
+      "expected": false,
+      "provenance": "AI-guided student entry"
+    },
+    {
+      "time": "18:26:00",
+      "expected": true,
+      "provenance": "User chose time and expected result; AI supplied code; student entered it"
+    },
+    {
+      "time": "18:25:00",
+      "expected": false,
+      "provenance": "AI-authored at explicit user request"
+    }
+  ],
+  "fixtureDate": "2026-11-17",
+  "fixtureTimeZone": "+09:00",
+  "source": {
+    "path": "practice/task-001a.mjs",
+    "sha256": "2543b334402247b29682931b1910f269ae32021799836fc7cf1d8d69c8413e59"
+  },
+  "testSource": {
+    "path": "practice/task-001a.test.mjs",
+    "sha256": "13e9b7b722dea1da9bb0d98cbee2d56a4374fe4153d3e881368eeb5c9fdb4bef"
+  },
+  "output": {
+    "path": "test-output.tap",
+    "sha256": "d422aba2ba50e0af07b784b0b7b04775180bcc60cc9a3b48e8656be2b2ad406d"
+  },
+  "limits": "Three synthetic time comparisons only. True means exception review, not final lateness. Strict input type/format, daily storage, exception workflow and sensor operation not validated. Do not credit AI equality test as student-authored."
+}
