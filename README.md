@@ -21,11 +21,11 @@
 
 **장치 현황(2026-11-17 갱신):** 사용자가 구매를 보고한 상품은 **AS608 센서, F-F 점퍼선, microSD 카드, Raspberry Pi Zero 2 W(with Headers)**로 식별했으나, 이후 **라즈베리파이 주문 취소**를 알려주었다. 해당 보드는 준비된 장비에서 제외하며 사용할 중심 보드는 미정이다. [부품 목록과 확인 범위](docs/HARDWARE_INVENTORY.md). 센서 실물 사양·핀 배치·전원·통신·부팅·인식 동작은 아직 확인하지 않았다. 학생의 출석 판정 과제는 노트북에서 가상 데이터로 먼저 진행할 수 있다.
 
-## 현재 구현 — 날짜별 한 건 저장
+## 현재 구현 — 출석 저장·미확인 명단·사유 확인
 
-[로컬 출석 저장 모듈](src/daily-attendance.mjs)을 AI가 구현했다. 한국 날짜·가명 학생 ID별로 최초 기록 한 건을 SQLite 파일에 저장하고, 재인식은 최초 시각·상태를 유지한다. 자정이 지나면 새 기록을 만들며 18:25 이후 첫 인식은 사유 확인 필요로 저장한다. 파일 재개방과 동시 요청을 포함해 **현재 전체 89개 테스트가 통과**했다. [결과](evidence/daily-attendance-01/result.json), [사용 방법과 한계](docs/DAILY_ATTENDANCE.md).
+[로컬 출석 저장 모듈](src/daily-attendance.mjs)을 AI가 구현했다. 한국 날짜·가명 학생 ID별로 최초 기록 한 건을 SQLite 파일에 저장하고, 재인식은 최초 시각·상태를 유지한다. 여기에 합성 명단 대조, 18:25부터 미확인 구분, 사유 확인과 실제 출석의 분리, 확인 후 지각 면제와 변경 이력을 추가했다. **현재 전체 119개 테스트가 통과**했다. [현재 결과](evidence/roster-review-01/result.json), [명단·사유 기능과 한계](docs/ROSTER_REVIEW.md), [출석 저장 설명](docs/DAILY_ATTENDANCE.md).
 
-`node scripts/demo-attendance.mjs`로 가상 학생 데모를 실행할 수 있다. 실제 학생·지문을 사용하지 않으며 데이터베이스는 Git에서 제외된 `local/`에 남는다. 명단 화면·사유 확인·센서·실제 알림은 아직 미구현이다.
+`node scripts/demo-attendance.mjs`는 가상 출석 저장을, `node scripts/demo-roster.mjs`는 가상 네 명의 명단·사유 확인 흐름을 보여준다. 실제 학생·지문은 사용하지 않는다. 파일형 데모 데이터베이스는 Git에서 제외된 `local/`에 남고 명단 데모는 메모리에서만 실행한다. 브라우저 화면·자동 갱신·담당자 인증·센서·실제 알림은 아직 미구현이다.
 
 ## 첫 학생 과제와 시각 비교 이력
 
@@ -43,7 +43,7 @@
 
 ## 기록과 다음 단계
 
-사용자의 [18:26 사례 선택과 검증](evidence/task-001a-user-selected-case-01/verification.json), 예상값만 바꿔 의도적 실패를 확인한 뒤 복원한 [통제 연습](evidence/task-001a-test-control-01/restored-result.json)을 보존했다. 다음 구현 범위는 합성 학생 명단에서 미확인 학생을 표시하고 사유 확인과 출석을 구분하는 기능이다. 학교 운영·학생 독립 구현 성과로 확대하지 않는다.
+사용자의 [18:26 사례 선택과 검증](evidence/task-001a-user-selected-case-01/verification.json), 예상값만 바꿔 의도적 실패를 확인한 뒤 복원한 [통제 연습](evidence/task-001a-test-control-01/restored-result.json)을 보존했다. 다음은 노트북에서 명단을 보고 확인 작업을 할 수 있는 화면과 접근 통제다. 학교 운영·학생 독립 구현 성과로 확대하지 않는다.
 
 - [원본 출처 및 참고 코드 검토](docs/REFERENCE_AUDIT.md)
 - [기여 기록과 저자 구분](docs/CONTRIBUTION_LOG.md)

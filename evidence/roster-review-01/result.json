@@ -1,0 +1,60 @@
+{
+  "dateKST": "2026-11-18",
+  "operator": "Codex AI assistant",
+  "authorship": "New roster projection, review storage and tests are AI-authored under user continuation instruction",
+  "baseCommit": "d52b1a42d122c59972a86050fe6746e5a629d3ec",
+  "runtime": "v24.22.1",
+  "command": "node --test --test-reporter=tap practice/task-001a.test.mjs practice/task-001a.validation.test.mjs test/daily-attendance.test.mjs test/roster.test.mjs",
+  "exitCode": 0,
+  "tests": 119,
+  "passed": 119,
+  "failed": 0,
+  "sources": [
+    {
+      "path": "src/daily-attendance.mjs",
+      "sha256": "45247369ea4d080b118e881a65d1118e9677e7479f44e0fc17cb1590c9deac37"
+    },
+    {
+      "path": "src/roster.mjs",
+      "sha256": "ebd0762b4d4a45df31a7f6b381a61cb4352a204ef044cf5c2f8849ff6805e06d"
+    },
+    {
+      "path": "src/attendance-rules.mjs",
+      "sha256": "3d2e66f3be050b511ccea3db9713b914e9c4f425241d3bacd63caafb4969cab2"
+    },
+    {
+      "path": "src/timestamp.mjs",
+      "sha256": "06ab372ee671f887719bce2bf72a8e84466286ff8c969d1b7ae1107a4eb109c4"
+    },
+    {
+      "path": "practice/task-001a.mjs",
+      "sha256": "9e850b804e55867ee69dffb5a2a6521e6cc1646347c6fe94348acbfc5c19b380"
+    },
+    {
+      "path": "practice/task-001a.test.mjs",
+      "sha256": "13e9b7b722dea1da9bb0d98cbee2d56a4374fe4153d3e881368eeb5c9fdb4bef"
+    },
+    {
+      "path": "practice/task-001a.validation.test.mjs",
+      "sha256": "c52fa69adc7304110cb55609dbd8cd23bd5a1bf846e136dffb930f73d26a7ff1"
+    },
+    {
+      "path": "test/daily-attendance.test.mjs",
+      "sha256": "440edaaabaee33615a6f249bbcf56cf97fa4c3843883a417afa3f9d25fe07c69"
+    },
+    {
+      "path": "test/roster.test.mjs",
+      "sha256": "f6ffa47bd20ed11190067c25ab672518fe20ef22e36f6552f5a2fce4d022966a"
+    },
+    {
+      "path": "scripts/demo-roster.mjs",
+      "sha256": "1fdcd088cf2a3239ebbd1cc8a506bb98a64ca12ed48abc56789708f7d0476818"
+    }
+  ],
+  "output": {
+    "path": "run-01.tap",
+    "sha256": "78d73dbe3cca7158e6a4a9cbb11dd11932bc723ba27c8cba48bcbddbec53c2e4"
+  },
+  "coverage": "Prior 89 checks plus roster opening at 18:25, future-event filtering, separate reason/attendance, explicit late exemption, immutable original scan, version conflict, review audit, persistence and concurrent review",
+  "limits": "Synthetic local API only; not student independent implementation, real roster, automatic UI scheduler, user authentication, notification transmission or sensor validation."
+}

@@ -1,42 +1,8 @@
 // AI-authored local prototype, 2026-11-18 KST. Synthetic use only.
 import { DatabaseSync } from 'node:sqlite';
 import { parseTimestamp } from './timestamp.mjs';
-
-const koreanClock = new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'Asia/Seoul', calendar: 'gregory', numberingSystem: 'latn',
-    era: 'short', year: 'numeric', month: '2-digit', day: '2-digit',
-    hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23',
-});
-
-function validateStudentId(studentId) {
-    if (typeof studentId !== 'string' || studentId.length > 64
-        || !/^[A-Za-z0-9]/.test(studentId) || /[^A-Za-z0-9_-]/.test(studentId)) {
-        throw new Error('학생 ID는 영문·숫자로 시작하는 1~64자 가명 ID여야 합니다.');
-    }
-}
-
-function localContext(milliseconds) {
-    const parts = Object.fromEntries(koreanClock.formatToParts(new Date(milliseconds))
-        .filter(part => part.type !== 'literal').map(part => [part.type, part.value]));
-    const year = Number(parts.year);
-    if (parts.era !== 'AD' || year < 1 || year > 9999) {
-        throw new Error('출석 저장은 한국 날짜의 연도 0001~9999만 지원합니다.');
-    }
-    const localSeconds = Number(parts.hour) * 3600 + Number(parts.minute) * 60 + Number(parts.second);
-    const cutoffSeconds = 18 * 3600 + 25 * 60;
-    const afterStart = localSeconds > cutoffSeconds
-        || (localSeconds === cutoffSeconds && new Date(milliseconds).getUTCMilliseconds() > 0);
-    return {
-        attendanceDate: `${String(year).padStart(4, '0')}-${parts.month}-${parts.day}`,
-        status: afterStart ? 'review_required' : 'present',
-    };
-}
-
-function validateDate(attendanceDate) {
-    if (typeof attendanceDate !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(attendanceDate)
-        || attendanceDate.startsWith('0000')) throw new Error('출석 날짜가 올바르지 않습니다.');
-    parseTimestamp(`${attendanceDate}T00:00:00+09:00`, '출석 날짜');
-}
+import { koreanContext, validateDate, validateStudentId } from './attendance-rules.mjs';
+import { validateReview, reviewFromRow, reviewState, validateRosterRequest, projectRoster } from './roster.mjs';
 
 function recordFromRow(row) {
     if (!row) return null;
@@ -66,6 +32,22 @@ export function openAttendanceStore(databasePath) {
                 status TEXT NOT NULL CHECK (status IN ('present', 'review_required')),
                 PRIMARY KEY (attendance_date, student_id)
             ) STRICT;
+            CREATE TABLE IF NOT EXISTS reason_reviews (
+                review_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                previous_review_id INTEGER NOT NULL,
+                attendance_date TEXT NOT NULL,
+                student_id TEXT NOT NULL,
+                reviewer_id TEXT NOT NULL,
+                reviewed_at TEXT NOT NULL,
+                reviewed_at_utc TEXT NOT NULL,
+                reviewed_at_ms INTEGER NOT NULL,
+                action TEXT NOT NULL CHECK (action IN ('confirm_reason', 'waive_lateness', 'clear_reason')),
+                reason_code TEXT,
+                attendance_reference_utc TEXT,
+                CHECK ((action = 'confirm_reason' AND reason_code IS NOT NULL AND reason_code IN ('reported_reason', 'outing', 'outing_return'))
+                    OR (action IN ('waive_lateness', 'clear_reason') AND reason_code IS NULL))
+            ) STRICT;
+            CREATE INDEX IF NOT EXISTS reason_reviews_student ON reason_reviews(attendance_date, student_id, review_id);
         `);
         const insert = db.prepare(`
             INSERT INTO daily_attendance
@@ -75,8 +57,26 @@ export function openAttendanceStore(databasePath) {
         `);
         const selectOne = db.prepare('SELECT * FROM daily_attendance WHERE attendance_date = ? AND student_id = ?');
         const selectDay = db.prepare('SELECT * FROM daily_attendance WHERE attendance_date = ? ORDER BY student_id');
+        const selectReviews = db.prepare('SELECT * FROM reason_reviews WHERE attendance_date = ? AND student_id = ? ORDER BY review_id');
+        const selectReviewDay = db.prepare('SELECT * FROM reason_reviews WHERE attendance_date = ? ORDER BY review_id');
+        const insertReview = db.prepare(`INSERT INTO reason_reviews
+            (previous_review_id, attendance_date, student_id, reviewer_id, reviewed_at, reviewed_at_utc,
+                reviewed_at_ms, action, reason_code, attendance_reference_utc)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
+        const selectReview = db.prepare('SELECT * FROM reason_reviews WHERE review_id = ?');
         const ensureOpen = () => {
             if (closed) throw new Error('출석 저장소가 닫혔습니다.');
+        };
+        const transaction = (write, operation) => {
+            db.exec(write ? 'BEGIN IMMEDIATE' : 'BEGIN');
+            try {
+                const result = operation();
+                db.exec('COMMIT');
+                return result;
+            } catch (error) {
+                if (db.isTransaction) db.exec('ROLLBACK');
+                throw error;
+            }
         };
 
         return Object.freeze({
@@ -84,7 +84,7 @@ export function openAttendanceStore(databasePath) {
                 ensureOpen();
                 validateStudentId(studentId);
                 const milliseconds = parseTimestamp(recognizedAt, '인식 시각');
-                const { attendanceDate, status } = localContext(milliseconds);
+                const { attendanceDate, status } = koreanContext(milliseconds);
                 const result = insert.run(studentId, attendanceDate, recognizedAt,
                     new Date(milliseconds).toISOString(), status);
                 return Object.freeze({
@@ -102,6 +102,47 @@ export function openAttendanceStore(databasePath) {
                 ensureOpen();
                 validateDate(attendanceDate);
                 return Object.freeze(selectDay.all(attendanceDate).map(recordFromRow));
+            },
+            recordReview(input) {
+                ensureOpen();
+                const review = validateReview(input);
+                return transaction(true, () => {
+                    const history = selectReviews.all(review.attendanceDate, review.studentId).map(reviewFromRow);
+                    const previous = history.at(-1);
+                    if ((previous?.reviewId ?? 0) !== review.expectedReviewId) {
+                        const error = new Error('사유 확인 이력이 바뀌었습니다. 최신 명단을 다시 확인해주세요.');
+                        error.code = 'STALE_REVIEW';
+                        throw error;
+                    }
+                    if (previous && review.milliseconds < Date.parse(previous.reviewedAtUtc)) {
+                        throw new Error('이전 확인보다 과거 시각으로 기록할 수 없습니다.');
+                    }
+                    let reference = null;
+                    if (review.action === 'waive_lateness') {
+                        const attendance = recordFromRow(selectOne.get(review.attendanceDate, review.studentId));
+                        if (!attendance || attendance.status !== 'review_required') throw new Error('늦은 출석 기록을 먼저 확인해주세요.');
+                        if (review.milliseconds < Date.parse(attendance.firstRecognizedAtUtc)) throw new Error('출석보다 이전 시각에 면제할 수 없습니다.');
+                        if (!reviewState(history).reason) throw new Error('사유 확인을 먼저 기록해주세요.');
+                        reference = attendance.firstRecognizedAtUtc;
+                    }
+                    const result = insertReview.run(review.expectedReviewId, review.attendanceDate, review.studentId,
+                        review.reviewerId, review.reviewedAt, new Date(review.milliseconds).toISOString(),
+                        review.milliseconds, review.action, review.reasonCode, reference);
+                    return reviewFromRow(selectReview.get(result.lastInsertRowid));
+                });
+            },
+            listReviewHistory({ studentId, attendanceDate } = {}) {
+                ensureOpen();
+                validateStudentId(studentId);
+                validateDate(attendanceDate);
+                return Object.freeze(selectReviews.all(attendanceDate, studentId).map(reviewFromRow));
+            },
+            getRosterSummary(input) {
+                ensureOpen();
+                const request = validateRosterRequest(input);
+                return transaction(false, () => projectRoster(request,
+                    selectDay.all(request.attendanceDate).map(recordFromRow),
+                    selectReviewDay.all(request.attendanceDate).map(reviewFromRow)));
             },
             close() {
                 if (!closed) {
