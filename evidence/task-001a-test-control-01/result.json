@@ -1,0 +1,24 @@
+{
+  "dateKST": "2026-11-18",
+  "operator": "Codex AI assistant",
+  "studentAction": "Changed the AI-provided test expectation from false to true as explicitly guided",
+  "independentStudentDesign": false,
+  "baseCommit": "f01e7cb885d1198a080202f3e944260d026baf2e",
+  "runtime": "v24.22.1",
+  "command": "node --test --test-reporter=tap practice/task-001a.test.mjs",
+  "exitCode": 1,
+  "tests": 1,
+  "passed": 0,
+  "failed": 1,
+  "expectedOutcome": "Deliberate assertion failure: scan at 18:20 precedes start at 18:25, actual false differs from deliberately incorrect expected true",
+  "sourceHashes": {
+    "function": "2543b334402247b29682931b1910f269ae32021799836fc7cf1d8d69c8413e59",
+    "test": "1639eabeedbcd1e7e274a03c52ecb463e51655341ecd20766a1974b364faaa9f"
+  },
+  "artifacts": {
+    "functionSource": "function-source.txt",
+    "testSource": "intentionally-failing-test-source.txt",
+    "output": "failure.tap"
+  },
+  "limits": "AI-operated teaching control, not an application defect, independent student test design or sensor validation. Active test should be restored to expected false by the student."
+}
