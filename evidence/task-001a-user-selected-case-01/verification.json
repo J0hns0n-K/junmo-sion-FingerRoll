@@ -1,0 +1,33 @@
+{
+  "dateKST": "2026-11-18",
+  "operator": "Codex AI assistant",
+  "selectionRecord": "selection.json",
+  "status": "User-selected case entered following AI-provided code and verified by AI",
+  "command": "node --test practice/task-001a.test.mjs",
+  "observedExitCode": 0,
+  "tests": 2,
+  "passed": 2,
+  "failed": 0,
+  "cases": [
+    {
+      "recognizedAt": "2026-11-17T18:20:00+09:00",
+      "expected": false,
+      "actual": false,
+      "inputSelection": "AI"
+    },
+    {
+      "recognizedAt": "2026-11-17T18:26:00+09:00",
+      "expected": true,
+      "actual": true,
+      "inputTimeAndExpectationSelection": "user",
+      "syntheticDateAndCodeTemplate": "AI"
+    }
+  ],
+  "sourcePath": "practice/task-001a.mjs",
+  "sourceSha256": "2543b334402247b29682931b1910f269ae32021799836fc7cf1d8d69c8413e59",
+  "testSnapshot": "verified-test-source.txt",
+  "testSha256": "e770b32c60edf54493d0df3843afe73e49501afee29fd6e79308c3acd370cb28",
+  "baseCommit": "53e941c8bb288a7d6a9ac25c1772abffd13516fa",
+  "snapshotNote": "Exact test file at successful execution before attribution comments are updated",
+  "limits": "Guided case selection and entry; independent algorithm/test implementation and student execution not established. Only two synthetic tests; strict input format, daily storage, exception processing and hardware not verified."
+}
