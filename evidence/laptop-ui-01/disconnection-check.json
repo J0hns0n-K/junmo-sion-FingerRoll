@@ -1,0 +1,8 @@
+{
+  "operator": "AI assistant",
+  "checkedAtUtc": "2026-11-18T08:19:44.008Z",
+  "action": "Stopped owned preview server; observed existing browser without reloading",
+  "visibleConnectionStatus": "연결이 끊겼습니다. 화면이 최신 상태가 아니니 출석·미확인을 판단하지 마세요.",
+  "expected": "Show disconnected/stale warning; no automatic absence judgment",
+  "passed": true
+}

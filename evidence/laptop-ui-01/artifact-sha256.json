@@ -1,0 +1,15 @@
+{
+  "operator": "AI assistant",
+  "sourceRevision": "b6b649220d4ad9c584aba5e19bccb9c7096cd15f",
+  "sourceIdentity": "Exact modified source hashes in result.json; commit containing evidence binds source and result",
+  "sha256": {
+    "before-start.jpg": "f62fb593eea588ba2013aadf002169c4bc973d25bcb8a07133a1f896adcf6f84",
+    "board-result.jpg": "d5bc52f1d76b6f3ed23d53525bef87a1575b7ae1387ad06d8150071578d6904a",
+    "browser-check.json": "8db11f2a3d7946a0c780a42fa21e53d14096f44fea6c04dd6ac8d648072d3640",
+    "desktop-result.jpg": "f73dacd5dd1ddbb54be5c3f6b1080affdfbde9edaf6407d86f377afae60724fa",
+    "disconnection-check.json": "5271783b97c87ed08112a642a34f5bffef0c0ea58278a21299c7e1d66c0bf0c9",
+    "result.json": "1e7423425917f5fa88c93bb4deacf98c06b8d9416c2e4fd0323841ffad81400b",
+    "run-01.tap": "06c0d53975fcbc6b4338fabeeb41b7b69eb47c582e733e279a9ff5f65f1efee2",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

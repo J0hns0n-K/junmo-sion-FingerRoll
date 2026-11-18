@@ -1,0 +1,40 @@
+{
+  "operator": "AI assistant",
+  "method": "Manual browser UI through cua_repl; not automated test count",
+  "checkedAtUtc": "2026-11-18T08:19:29.083Z",
+  "url": "http://127.0.0.1:4318/",
+  "scenarios": [
+    "Before 18:25 normal check-in and pending roster",
+    "Advance simulated clock past 18:25 and show unconfirmed students",
+    "Repeat S001 after 18:25 preserves 18:24:17",
+    "S002 reason confirmation leaves first check-in empty",
+    "S003 late scan at 18:25:39; explicit outing-return confirmation and waiver preserve scan time",
+    "Clear S003 reason returns to review_required and retains confirmation/waiver/clear history",
+    "Reload retains server session records"
+  ],
+  "boardBeforeCancellation": "가상 학생\t현재 상태\t첫 출석\t사유 확인\t작업\nS001\t정상 출석\t18:24:17\t확인 없음\t\n가상 출석\n사유 확인\n이력\n\nS002\t사유 확인 · 출석 전\t—\t전달받은 사유\t\n가상 출석\n사유 확인\n사유 취소\n이력\n\nS003\t지각 면제\t18:25:39\t복귀 직후 확인\t\n가상 출석\n사유 확인\n사유 취소\n이력\n\nS004\t미확인\t—\t확인 없음\t\n가상 출석\n사유 확인\n이력",
+  "cancelledRow": "S003\t지각 여부 확인\t18:25:39\t확인 없음\t\n가상 출석\n사유 확인\n이력",
+  "auditAfterCancellation": "18:25:40 · 사유 확인 / 복귀 직후 확인 · 이력 #2\n18:25:40 · 지각 면제 · 이력 #3\n18:26:38 · 사유 확인 취소 · 이력 #4",
+  "measuredLayouts": [
+    {
+      "pageWidth": 973,
+      "tableWidth": 874,
+      "width": 984,
+      "wrapperWidth": 874
+    },
+    {
+      "pageWidth": 288,
+      "tableWidth": 682,
+      "width": 300,
+      "wrapperWidth": 259
+    }
+  ],
+  "browserErrorAndWarningLogs": [],
+  "limitations": [
+    "Synthetic fixed day only; no real fingerprint, school identities, notifications or student implementation",
+    "Viewport requests 1280/390 yielded observed DOM widths 984/300; measurements use observed values",
+    "before-start.jpg and desktop-result.jpg were captured with an explicit viewport override and show clipping; board-result.jpg uses restored default viewport",
+    "Small-screen table intentionally scrolls horizontally; no page-wide horizontal overflow in measured layouts",
+    "Server polling is nominally one second and is not a real-time scheduling guarantee"
+  ]
+}
