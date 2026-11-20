@@ -1,0 +1,17 @@
+{
+  "operator": "AI assistant",
+  "baseRevision": "c09e15fdc61b099610fbef693495eeddf827392f",
+  "sourceIdentity": "Exact source hashes in result-02.json; containing commit binds source and evidence",
+  "sha256": {
+    "browser-check.json": "e60711f9b6b26ca63f1076c5bd700f058a74b6cf6c7449dcf9c339096a79d725",
+    "browser-server.mjs": "8599e91b474b8dba40740c2be1bd20e3f9e7eb3ed22d6798a86f3e5cb8fc524c",
+    "new-practice.jpg": "69d056ee91705b3e7bd8250149bbc438aaa30a4e53b7e8fd560798f269ccaa60",
+    "result-02.json": "8c12287928604550427c9f0fba0c5823c99f44768c131825fde468e74f41850b",
+    "result.json": "69326ece35baf261eba4076923a9e8c9be296e67f3468490d69df5df0010df61",
+    "resume-result.jpg": "1f4301518e8cebc3f02637bfe7f560d85ba02b239d0f9f0e8c154375e6bb545f",
+    "run-01.tap": "8dba6b2cbe55259ecc46aeafc20422fa79772a160d106304c1fb53f07bc1da25",
+    "run-02.tap": "e0ac8d2ee59b159b6080aacee4565c233f5230ea65ed850eb7d946ffffd81157",
+    "stderr-02.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

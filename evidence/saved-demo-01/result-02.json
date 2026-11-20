@@ -1,0 +1,42 @@
+{
+  "id": "saved-demo-01/recheck-02",
+  "operator": "AI assistant",
+  "authorship": "AI-authored",
+  "executedAtUtc": "2026-11-20T01:15:24.680Z",
+  "runtime": "v24.22.3",
+  "baseRevision": "c09e15fdc61b099610fbef693495eeddf827392f",
+  "command": "node --test --test-reporter=tap practice/task-001a.test.mjs practice/task-001a.validation.test.mjs test/daily-attendance.test.mjs test/roster.test.mjs test/demo-server.test.mjs test/persistent-demo.test.mjs",
+  "inputs": "Fixed synthetic roster S001-S004, simulated 2026-11-18 clock; disposable temporary database directories",
+  "exitCode": 0,
+  "tests": 141,
+  "passed": 141,
+  "failed": 0,
+  "sourceSha256": {
+    "practice/task-001a.mjs": "9e850b804e55867ee69dffb5a2a6521e6cc1646347c6fe94348acbfc5c19b380",
+    "practice/task-001a.test.mjs": "13e9b7b722dea1da9bb0d98cbee2d56a4374fe4153d3e881368eeb5c9fdb4bef",
+    "practice/task-001a.validation.test.mjs": "c52fa69adc7304110cb55609dbd8cd23bd5a1bf846e136dffb930f73d26a7ff1",
+    "src/timestamp.mjs": "06ab372ee671f887719bce2bf72a8e84466286ff8c969d1b7ae1107a4eb109c4",
+    "src/attendance-rules.mjs": "3d2e66f3be050b511ccea3db9713b914e9c4f425241d3bacd63caafb4969cab2",
+    "src/daily-attendance.mjs": "45247369ea4d080b118e881a65d1118e9677e7479f44e0fc17cb1590c9deac37",
+    "src/roster.mjs": "ebd0762b4d4a45df31a7f6b381a61cb4352a204ef044cf5c2f8849ff6805e06d",
+    "src/demo-clock.mjs": "e7166eb11561a10632e0cad0ed3c7f5cb62d6f60964f3fee23854de5803a422b",
+    "src/demo-server.mjs": "b22023d6f4065e79dd43d84de1ffc261eda47a7bf2465b99b3a670d135e67fb6",
+    "src/persistent-demo.mjs": "440feff187e2426529e04fbdf4bb071ac1f93ec829d52bd1e38d5103d409f517",
+    "scripts/demo-web.mjs": "efff1e0626ab97ec44291fe12855ed0e084366ae5702096eeb82cf0faba67569",
+    "web/index.html": "d0f27a38b4986f92629acbc791619e0fb8496bcc89c9923829affee1bbb2db4b",
+    "web/app.js": "0034dc87e93be383a9d787dc9a533f5a593856f3ad0d1eed38e59cc3a1a712c8",
+    "web/style.css": "3435f713fac87670c5dba43881adc48c1fe2f2d943232b22ef9299f7717a46eb",
+    "test/daily-attendance.test.mjs": "440edaaabaee33615a6f249bbcf56cf97fa4c3843883a417afa3f9d25fe07c69",
+    "test/roster.test.mjs": "f6ffa47bd20ed11190067c25ab672518fe20ef22e36f6552f5a2fce4d022966a",
+    "test/demo-server.test.mjs": "29f90cee8aecb3d64ac22404fc74542a5594ea184e7524b549b226acde6cdc58",
+    "test/persistent-demo.test.mjs": "9c1796b00cad30976229a04a69754c410da6dbfc648a5e2f5d57ed05a5758968"
+  },
+  "outputSha256": "e0ac8d2ee59b159b6080aacee4565c233f5230ea65ed850eb7d946ffffd81157",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "limitations": [
+    "Local synthetic software only; no student implementation, sensor or deployment evidence",
+    "Process exit tests committed SQLite writes, not device power loss or storage failure",
+    "Saved fake sessions are excluded from Git; no real information or messages"
+  ],
+  "reason": "Runtime changed from Node v24.22.1 to v24.22.3 while documentation was finalized; unchanged source rerun"
+}

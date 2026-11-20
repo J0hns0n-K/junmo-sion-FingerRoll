@@ -1,0 +1,856 @@
+TAP version 13
+# Subtest: 18시 20분은 사유 확인 대상이 아니다 - 안내 연습
+ok 1 - 18시 20분은 사유 확인 대상이 아니다 - 안내 연습
+  ---
+  duration_ms: 0.9395
+  type: 'test'
+  ...
+# Subtest: 18시 26분은 사유 확인이 필요하다
+ok 2 - 18시 26분은 사유 확인이 필요하다
+  ---
+  duration_ms: 0.137
+  type: 'test'
+  ...
+# Subtest: 18시 25분 정각은 사유 확인 대상이 아니다
+ok 3 - 18시 25분 정각은 사유 확인 대상이 아니다
+  ---
+  duration_ms: 0.8193
+  type: 'test'
+  ...
+# Subtest: UTC 표기로 같은 순간
+ok 4 - UTC 표기로 같은 순간
+  ---
+  duration_ms: 2.0635
+  type: 'test'
+  ...
+# Subtest: 다른 오프셋으로 같은 순간
+ok 5 - 다른 오프셋으로 같은 순간
+  ---
+  duration_ms: 0.1258
+  type: 'test'
+  ...
+# Subtest: 표기 날짜가 달라도 실제로 1분 후
+ok 6 - 표기 날짜가 달라도 실제로 1분 후
+  ---
+  duration_ms: 0.0649
+  type: 'test'
+  ...
+# Subtest: 정각 직전 밀리초
+ok 7 - 정각 직전 밀리초
+  ---
+  duration_ms: 0.0599
+  type: 'test'
+  ...
+# Subtest: 정각 직후 밀리초
+ok 8 - 정각 직후 밀리초
+  ---
+  duration_ms: 0.0844
+  type: 'test'
+  ...
+# Subtest: 소수초 한 자리
+ok 9 - 소수초 한 자리
+  ---
+  duration_ms: 0.0788
+  type: 'test'
+  ...
+# Subtest: 소수초 두 자리
+ok 10 - 소수초 두 자리
+  ---
+  duration_ms: 0.0694
+  type: 'test'
+  ...
+# Subtest: 윤년 2월 29일
+ok 11 - 윤년 2월 29일
+  ---
+  duration_ms: 0.0471
+  type: 'test'
+  ...
+# Subtest: 400년 윤년
+ok 12 - 400년 윤년
+  ---
+  duration_ms: 0.0618
+  type: 'test'
+  ...
+# Subtest: 연도 0000
+ok 13 - 연도 0000
+  ---
+  duration_ms: 0.1043
+  type: 'test'
+  ...
+# Subtest: 이른 새벽도 허용
+ok 14 - 이른 새벽도 허용
+  ---
+  duration_ms: 0.0567
+  type: 'test'
+  ...
+# Subtest: 늦은 밤도 허용
+ok 15 - 늦은 밤도 허용
+  ---
+  duration_ms: 0.0431
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 숫자
+ok 16 - 인식 시각 거부: 숫자
+  ---
+  duration_ms: 0.411
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 숫자
+ok 17 - 시작 시각 거부: 숫자
+  ---
+  duration_ms: 0.0762
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 불리언
+ok 18 - 인식 시각 거부: 불리언
+  ---
+  duration_ms: 0.0321
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 불리언
+ok 19 - 시작 시각 거부: 불리언
+  ---
+  duration_ms: 0.0299
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 배열
+ok 20 - 인식 시각 거부: 배열
+  ---
+  duration_ms: 0.0247
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 배열
+ok 21 - 시작 시각 거부: 배열
+  ---
+  duration_ms: 0.0248
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 객체
+ok 22 - 인식 시각 거부: 객체
+  ---
+  duration_ms: 0.0213
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 객체
+ok 23 - 시작 시각 거부: 객체
+  ---
+  duration_ms: 0.0227
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: Date 객체
+ok 24 - 인식 시각 거부: Date 객체
+  ---
+  duration_ms: 0.0287
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: Date 객체
+ok 25 - 시작 시각 거부: Date 객체
+  ---
+  duration_ms: 0.0276
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: null
+ok 26 - 인식 시각 거부: null
+  ---
+  duration_ms: 0.0251
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: null
+ok 27 - 시작 시각 거부: null
+  ---
+  duration_ms: 0.0226
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: undefined
+ok 28 - 인식 시각 거부: undefined
+  ---
+  duration_ms: 0.0226
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: undefined
+ok 29 - 시작 시각 거부: undefined
+  ---
+  duration_ms: 0.0195
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 빈 문자열
+ok 30 - 인식 시각 거부: 빈 문자열
+  ---
+  duration_ms: 0.0393
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 빈 문자열
+ok 31 - 시작 시각 거부: 빈 문자열
+  ---
+  duration_ms: 0.0224
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 공백
+ok 32 - 인식 시각 거부: 공백
+  ---
+  duration_ms: 0.0195
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 공백
+ok 33 - 시작 시각 거부: 공백
+  ---
+  duration_ms: 0.0327
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 날짜만 있음
+ok 34 - 인식 시각 거부: 날짜만 있음
+  ---
+  duration_ms: 0.035
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 날짜만 있음
+ok 35 - 시작 시각 거부: 날짜만 있음
+  ---
+  duration_ms: 0.0264
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 시간대 누락
+ok 36 - 인식 시각 거부: 시간대 누락
+  ---
+  duration_ms: 0.0212
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 시간대 누락
+ok 37 - 시작 시각 거부: 시간대 누락
+  ---
+  duration_ms: 0.0269
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 초 누락
+ok 38 - 인식 시각 거부: 초 누락
+  ---
+  duration_ms: 0.0212
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 초 누락
+ok 39 - 시작 시각 거부: 초 누락
+  ---
+  duration_ms: 0.0291
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 다른 날짜 형식
+ok 40 - 인식 시각 거부: 다른 날짜 형식
+  ---
+  duration_ms: 0.0225
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 다른 날짜 형식
+ok 41 - 시작 시각 거부: 다른 날짜 형식
+  ---
+  duration_ms: 0.0252
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 달력에 없는 2월 29일
+ok 42 - 인식 시각 거부: 달력에 없는 2월 29일
+  ---
+  duration_ms: 0.0253
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 달력에 없는 2월 29일
+ok 43 - 시작 시각 거부: 달력에 없는 2월 29일
+  ---
+  duration_ms: 0.0412
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 윤년이 아닌 1900년
+ok 44 - 인식 시각 거부: 윤년이 아닌 1900년
+  ---
+  duration_ms: 0.022
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 윤년이 아닌 1900년
+ok 45 - 시작 시각 거부: 윤년이 아닌 1900년
+  ---
+  duration_ms: 0.0591
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 4월 31일
+ok 46 - 인식 시각 거부: 4월 31일
+  ---
+  duration_ms: 0.0228
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 4월 31일
+ok 47 - 시작 시각 거부: 4월 31일
+  ---
+  duration_ms: 0.0541
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 0일
+ok 48 - 인식 시각 거부: 0일
+  ---
+  duration_ms: 0.0594
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 0일
+ok 49 - 시작 시각 거부: 0일
+  ---
+  duration_ms: 0.0317
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 13월
+ok 50 - 인식 시각 거부: 13월
+  ---
+  duration_ms: 0.0227
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 13월
+ok 51 - 시작 시각 거부: 13월
+  ---
+  duration_ms: 0.0259
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 24시
+ok 52 - 인식 시각 거부: 24시
+  ---
+  duration_ms: 0.0237
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 24시
+ok 53 - 시작 시각 거부: 24시
+  ---
+  duration_ms: 0.0373
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 60분
+ok 54 - 인식 시각 거부: 60분
+  ---
+  duration_ms: 0.0228
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 60분
+ok 55 - 시작 시각 거부: 60분
+  ---
+  duration_ms: 0.0242
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 60초
+ok 56 - 인식 시각 거부: 60초
+  ---
+  duration_ms: 0.0297
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 60초
+ok 57 - 시작 시각 거부: 60초
+  ---
+  duration_ms: 0.0817
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 오프셋 24시
+ok 58 - 인식 시각 거부: 오프셋 24시
+  ---
+  duration_ms: 0.0906
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 오프셋 24시
+ok 59 - 시작 시각 거부: 오프셋 24시
+  ---
+  duration_ms: 0.0464
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 오프셋 60분
+ok 60 - 인식 시각 거부: 오프셋 60분
+  ---
+  duration_ms: 0.0366
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 오프셋 60분
+ok 61 - 시작 시각 거부: 오프셋 60분
+  ---
+  duration_ms: 0.0283
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 앞 공백
+ok 62 - 인식 시각 거부: 앞 공백
+  ---
+  duration_ms: 0.0209
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 앞 공백
+ok 63 - 시작 시각 거부: 앞 공백
+  ---
+  duration_ms: 0.0273
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 끝 개행
+ok 64 - 인식 시각 거부: 끝 개행
+  ---
+  duration_ms: 0.024
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 끝 개행
+ok 65 - 시작 시각 거부: 끝 개행
+  ---
+  duration_ms: 0.0229
+  type: 'test'
+  ...
+# Subtest: 인식 시각 거부: 소수초 네 자리
+ok 66 - 인식 시각 거부: 소수초 네 자리
+  ---
+  duration_ms: 0.0205
+  type: 'test'
+  ...
+# Subtest: 시작 시각 거부: 소수초 네 자리
+ok 67 - 시작 시각 거부: 소수초 네 자리
+  ---
+  duration_ms: 0.0454
+  type: 'test'
+  ...
+# Subtest: 최초 출석은 원 시각과 UTC 시각을 저장한다
+ok 68 - 최초 출석은 원 시각과 UTC 시각을 저장한다
+  ---
+  duration_ms: 4.2292
+  type: 'test'
+  ...
+# Subtest: 정상 출석 뒤 늦은 재인식은 최초 시각과 상태를 유지한다
+ok 69 - 정상 출석 뒤 늦은 재인식은 최초 시각과 상태를 유지한다
+  ---
+  duration_ms: 0.9723
+  type: 'test'
+  ...
+# Subtest: 늦은 첫 출석도 확정 지각이 아닌 사유 확인 필요다
+ok 70 - 늦은 첫 출석도 확정 지각이 아닌 사유 확인 필요다
+  ---
+  duration_ms: 1.2488
+  type: 'test'
+  ...
+# Subtest: 나중에 도착한 과거 시각 이벤트도 최초 수락 기록을 덮어쓰지 않는다
+ok 71 - 나중에 도착한 과거 시각 이벤트도 최초 수락 기록을 덮어쓰지 않는다
+  ---
+  duration_ms: 0.5804
+  type: 'test'
+  ...
+# Subtest: 같은 순간의 다른 시간대 표기는 중복 출석이다
+ok 72 - 같은 순간의 다른 시간대 표기는 중복 출석이다
+  ---
+  duration_ms: 0.5969
+  type: 'test'
+  ...
+# Subtest: 서로 다른 학생은 같은 날짜에도 각각 기록한다
+ok 73 - 서로 다른 학생은 같은 날짜에도 각각 기록한다
+  ---
+  duration_ms: 0.7164
+  type: 'test'
+  ...
+# Subtest: 한국 자정 전후는 같은 UTC 날짜라도 별도 출석이다
+ok 74 - 한국 자정 전후는 같은 UTC 날짜라도 별도 출석이다
+  ---
+  duration_ms: 0.5841
+  type: 'test'
+  ...
+# Subtest: 시간 제한 없이 기록: 00:00:00
+ok 75 - 시간 제한 없이 기록: 00:00:00
+  ---
+  duration_ms: 0.4986
+  type: 'test'
+  ...
+# Subtest: 시간 제한 없이 기록: 18:09:59
+ok 76 - 시간 제한 없이 기록: 18:09:59
+  ---
+  duration_ms: 0.5799
+  type: 'test'
+  ...
+# Subtest: 시간 제한 없이 기록: 18:25:00
+ok 77 - 시간 제한 없이 기록: 18:25:00
+  ---
+  duration_ms: 0.6422
+  type: 'test'
+  ...
+# Subtest: 시간 제한 없이 기록: 18:25:00.001
+ok 78 - 시간 제한 없이 기록: 18:25:00.001
+  ---
+  duration_ms: 0.3844
+  type: 'test'
+  ...
+# Subtest: 시간 제한 없이 기록: 23:59:59.999
+ok 79 - 시간 제한 없이 기록: 23:59:59.999
+  ---
+  duration_ms: 0.3532
+  type: 'test'
+  ...
+# Subtest: 잘못된 입력은 기록이나 당일 기회를 만들지 않는다
+ok 80 - 잘못된 입력은 기록이나 당일 기회를 만들지 않는다
+  ---
+  duration_ms: 0.6842
+  type: 'test'
+  ...
+# Subtest: 잘못된 중복 이벤트를 거부해도 최초 기록은 유지한다
+ok 81 - 잘못된 중복 이벤트를 거부해도 최초 기록은 유지한다
+  ---
+  duration_ms: 0.5273
+  type: 'test'
+  ...
+# Subtest: 가명 학생 ID 입력을 검증한다
+ok 82 - 가명 학생 ID 입력을 검증한다
+  ---
+  duration_ms: 0.485
+  type: 'test'
+  ...
+# Subtest: 조회만으로 미확인 학생의 결석 기록을 생성하지 않는다
+ok 83 - 조회만으로 미확인 학생의 결석 기록을 생성하지 않는다
+  ---
+  duration_ms: 0.4021
+  type: 'test'
+  ...
+# Subtest: 조회 날짜도 실제 달력 날짜여야 한다
+ok 84 - 조회 날짜도 실제 달력 날짜여야 한다
+  ---
+  duration_ms: 0.4248
+  type: 'test'
+  ...
+# Subtest: 저장 범위 밖 기원전 날짜는 기록하지 않는다
+ok 85 - 저장 범위 밖 기원전 날짜는 기록하지 않는다
+  ---
+  duration_ms: 0.6594
+  type: 'test'
+  ...
+# Subtest: 호출자가 반환값을 수정해 저장 기록을 바꿀 수 없다
+ok 86 - 호출자가 반환값을 수정해 저장 기록을 바꿀 수 없다
+  ---
+  duration_ms: 0.5275
+  type: 'test'
+  ...
+# Subtest: 닫힌 저장소는 작업을 거부하고 여러 번 닫기는 허용한다
+ok 87 - 닫힌 저장소는 작업을 거부하고 여러 번 닫기는 허용한다
+  ---
+  duration_ms: 0.3251
+  type: 'test'
+  ...
+# Subtest: 파일을 닫고 다시 열어도 중복 방지와 최초 기록이 유지된다
+ok 88 - 파일을 닫고 다시 열어도 중복 방지와 최초 기록이 유지된다
+  ---
+  duration_ms: 110.4917
+  type: 'test'
+  ...
+# Subtest: 여러 프로세스가 같은 날 동시에 기록해도 한 건만 생성한다
+ok 89 - 여러 프로세스가 같은 날 동시에 기록해도 한 건만 생성한다
+  ---
+  duration_ms: 297.3319
+  type: 'test'
+  ...
+# Subtest: demo serves local assets with restrictive headers and no external scripts
+ok 90 - demo serves local assets with restrictive headers and no external scripts
+  ---
+  duration_ms: 49.4737
+  type: 'test'
+  ...
+# Subtest: 18:25 checklist opens with elapsed server demo time, without a write
+ok 91 - 18:25 checklist opens with elapsed server demo time, without a write
+  ---
+  duration_ms: 14.9068
+  type: 'test'
+  ...
+# Subtest: scan uses server time and repeats preserve the original record
+ok 92 - scan uses server time and repeats preserve the original record
+  ---
+  duration_ms: 11.5535
+  type: 'test'
+  ...
+# Subtest: exact 18:25 is on time and the following millisecond requires review
+ok 93 - exact 18:25 is on time and the following millisecond requires review
+  ---
+  duration_ms: 10.0046
+  type: 'test'
+  ...
+# Subtest: a confirmed reason does not fabricate a check-in
+ok 94 - a confirmed reason does not fabricate a check-in
+  ---
+  duration_ms: 6.3797
+  type: 'test'
+  ...
+# Subtest: late waiver is explicit, audited and keeps the scan time; clearing reverses the exemption
+ok 95 - late waiver is explicit, audited and keeps the scan time; clearing reverses the exemption
+  ---
+  duration_ms: 11.6445
+  type: 'test'
+  ...
+# Subtest: stale review returns conflict and preserves the first review
+ok 96 - stale review returns conflict and preserves the first review
+  ---
+  duration_ms: 7.1818
+  type: 'test'
+  ...
+# Subtest: unknown students, injected time/identity and detailed reasons are rejected
+ok 97 - unknown students, injected time/identity and detailed reasons are rejected
+  ---
+  duration_ms: 13.0396
+  type: 'test'
+  ...
+# Subtest: foreign and missing origins, missing header, and incorrect content type cannot mutate
+ok 98 - foreign and missing origins, missing header, and incorrect content type cannot mutate
+  ---
+  duration_ms: 14.1961
+  type: 'test'
+  ...
+# Subtest: forged Host and unsupported requests are rejected
+ok 99 - forged Host and unsupported requests are rejected
+  ---
+  duration_ms: 11.8424
+  type: 'test'
+  ...
+# Subtest: malformed, oversized and non-object JSON are rejected
+ok 100 - malformed, oversized and non-object JSON are rejected
+  ---
+  duration_ms: 8.7654
+  type: 'test'
+  ...
+# Subtest: demo time advances only forward and remains within its synthetic day
+ok 101 - demo time advances only forward and remains within its synthetic day
+  ---
+  duration_ms: 12.3997
+  type: 'test'
+  ...
+# Subtest: a fresh server starts with no records or reason history
+ok 102 - a fresh server starts with no records or reason history
+  ---
+  duration_ms: 15.1854
+  type: 'test'
+  ...
+# Subtest: a different or missing session cannot submit a stale browser action
+ok 103 - a different or missing session cannot submit a stale browser action
+  ---
+  duration_ms: 7.551
+  type: 'test'
+  ...
+# Subtest: restart resumes check-ins, reason history, waiver, session identity and simulated time
+ok 104 - restart resumes check-ins, reason history, waiver, session identity and simulated time
+  ---
+  duration_ms: 299.0024
+  type: 'test'
+  ...
+# Subtest: new practice keeps the prior database and rejects the prior browser session
+ok 105 - new practice keeps the prior database and rejects the prior browser session
+  ---
+  duration_ms: 149.8151
+  type: 'test'
+  ...
+# Subtest: process exit without close still retains committed records and their clock checkpoint
+ok 106 - process exit without close still retains committed records and their clock checkpoint
+  ---
+  duration_ms: 453.7101
+  type: 'test'
+  ...
+# Subtest: clock progress on a read and graceful close both survive reopening; downtime is paused
+ok 107 - clock progress on a read and graceful close both survive reopening; downtime is paused
+  ---
+  duration_ms: 93.5162
+  type: 'test'
+  ...
+# Subtest: failed new-session startup leaves the active pointer and prior records unchanged
+ok 108 - failed new-session startup leaves the active pointer and prior records unchanged
+  ---
+  duration_ms: 127.1441
+  type: 'test'
+  ...
+# Subtest: invalid, path-traversing or missing-file pointers fail without resetting stored inputs
+ok 109 - invalid, path-traversing or missing-file pointers fail without resetting stored inputs
+  ---
+  duration_ms: 69.0052
+  type: 'test'
+  ...
+# Subtest: clock checkpoints never move backwards when the supplied elapsed clock regresses
+ok 110 - clock checkpoints never move backwards when the supplied elapsed clock regresses
+  ---
+  duration_ms: 66.174
+  type: 'test'
+  ...
+# Subtest: an existing non-demo database is rejected without adding demo metadata
+ok 111 - an existing non-demo database is rejected without adding demo metadata
+  ---
+  duration_ms: 29.6026
+  type: 'test'
+  ...
+# Subtest: 18:25 직전에는 대기이고 정각부터 미확인 명단을 제공한다
+ok 112 - 18:25 직전에는 대기이고 정각부터 미확인 명단을 제공한다
+  ---
+  duration_ms: 5.1063
+  type: 'test'
+  ...
+# Subtest: 출석한 학생은 미확인 명단에서 빠진다
+ok 113 - 출석한 학생은 미확인 명단에서 빠진다
+  ---
+  duration_ms: 1.0469
+  type: 'test'
+  ...
+# Subtest: 조회 시각보다 미래의 인식은 과거 명단에 보이지 않는다
+ok 114 - 조회 시각보다 미래의 인식은 과거 명단에 보이지 않는다
+  ---
+  duration_ms: 0.7071
+  type: 'test'
+  ...
+# Subtest: 사유 확인만으로 출석 완료가 되지 않는다
+ok 115 - 사유 확인만으로 출석 완료가 되지 않는다
+  ---
+  duration_ms: 1.1907
+  type: 'test'
+  ...
+# Subtest: 사유를 미리 확인했어도 늦은 인식에는 명시적 면제가 필요하다
+ok 116 - 사유를 미리 확인했어도 늦은 인식에는 명시적 면제가 필요하다
+  ---
+  duration_ms: 1.3437
+  type: 'test'
+  ...
+# Subtest: 면제 뒤 재인식도 원 시각과 확인 결과를 유지한다
+ok 117 - 면제 뒤 재인식도 원 시각과 확인 결과를 유지한다
+  ---
+  duration_ms: 0.832
+  type: 'test'
+  ...
+# Subtest: 사유 취소는 출석을 지우지 않고 면제를 재검토 상태로 돌린다
+ok 118 - 사유 취소는 출석을 지우지 않고 면제를 재검토 상태로 돌린다
+  ---
+  duration_ms: 0.8642
+  type: 'test'
+  ...
+# Subtest: 사유가 바뀌면 과거 면제를 자동 재사용하지 않는다
+ok 119 - 사유가 바뀌면 과거 면제를 자동 재사용하지 않는다
+  ---
+  duration_ms: 0.7795
+  type: 'test'
+  ...
+# Subtest: 출석 없는 학생은 지각 면제만으로 출석 처리할 수 없다
+ok 120 - 출석 없는 학생은 지각 면제만으로 출석 처리할 수 없다
+  ---
+  duration_ms: 0.9079
+  type: 'test'
+  ...
+# Subtest: 정상 출석에는 지각 면제 처리를 만들지 않는다
+ok 121 - 정상 출석에는 지각 면제 처리를 만들지 않는다
+  ---
+  duration_ms: 0.7156
+  type: 'test'
+  ...
+# Subtest: 사유 확인 없이 지각 면제를 기록할 수 없다
+ok 122 - 사유 확인 없이 지각 면제를 기록할 수 없다
+  ---
+  duration_ms: 0.5501
+  type: 'test'
+  ...
+# Subtest: 출석보다 앞선 면제 시각을 거부한다
+ok 123 - 출석보다 앞선 면제 시각을 거부한다
+  ---
+  duration_ms: 0.7833
+  type: 'test'
+  ...
+# Subtest: 낡은 명단에서의 수정은 거부하고 저장소는 계속 사용 가능하다
+ok 124 - 낡은 명단에서의 수정은 거부하고 저장소는 계속 사용 가능하다
+  ---
+  duration_ms: 0.9348
+  type: 'test'
+  ...
+# Subtest: 확인 이력을 과거 시각으로 되돌려 추가할 수 없다
+ok 125 - 확인 이력을 과거 시각으로 되돌려 추가할 수 없다
+  ---
+  duration_ms: 1.5427
+  type: 'test'
+  ...
+# Subtest: 과거 시점 조회에는 이후 사유 확인이나 면제가 섞이지 않는다
+ok 126 - 과거 시점 조회에는 이후 사유 확인이나 면제가 섞이지 않는다
+  ---
+  duration_ms: 0.8482
+  type: 'test'
+  ...
+# Subtest: 다음 날 명단에 전날 사유가 넘어가지 않는다
+ok 127 - 다음 날 명단에 전날 사유가 넘어가지 않는다
+  ---
+  duration_ms: 0.5812
+  type: 'test'
+  ...
+# Subtest: UTC로 조회해도 한국 정각에 명단이 열린다
+ok 128 - UTC로 조회해도 한국 정각에 명단이 열린다
+  ---
+  duration_ms: 0.7579
+  type: 'test'
+  ...
+# Subtest: 명단 밖 기록을 명단 학생으로 추가하지 않는다
+ok 129 - 명단 밖 기록을 명단 학생으로 추가하지 않는다
+  ---
+  duration_ms: 0.6651
+  type: 'test'
+  ...
+# Subtest: 잘못된 명단과 날짜를 거부한다
+ok 130 - 잘못된 명단과 날짜를 거부한다
+  ---
+  duration_ms: 0.6189
+  type: 'test'
+  ...
+# Subtest: 잘못된 확인 입력은 저장하지 않는다: 상세 메모
+ok 131 - 잘못된 확인 입력은 저장하지 않는다: 상세 메모
+  ---
+  duration_ms: 0.4736
+  type: 'test'
+  ...
+# Subtest: 잘못된 확인 입력은 저장하지 않는다: 허용되지 않은 사유
+ok 132 - 잘못된 확인 입력은 저장하지 않는다: 허용되지 않은 사유
+  ---
+  duration_ms: 0.3943
+  type: 'test'
+  ...
+# Subtest: 잘못된 확인 입력은 저장하지 않는다: 허용되지 않은 작업
+ok 133 - 잘못된 확인 입력은 저장하지 않는다: 허용되지 않은 작업
+  ---
+  duration_ms: 0.4244
+  type: 'test'
+  ...
+# Subtest: 잘못된 확인 입력은 저장하지 않는다: 확인자 누락
+ok 134 - 잘못된 확인 입력은 저장하지 않는다: 확인자 누락
+  ---
+  duration_ms: 0.3749
+  type: 'test'
+  ...
+# Subtest: 잘못된 확인 입력은 저장하지 않는다: 다른 한국 날짜
+ok 135 - 잘못된 확인 입력은 저장하지 않는다: 다른 한국 날짜
+  ---
+  duration_ms: 0.3851
+  type: 'test'
+  ...
+# Subtest: 잘못된 확인 입력은 저장하지 않는다: 이력 번호 누락
+ok 136 - 잘못된 확인 입력은 저장하지 않는다: 이력 번호 누락
+  ---
+  duration_ms: 0.4947
+  type: 'test'
+  ...
+# Subtest: 반환된 명단과 이력을 수정해 저장 내용을 바꿀 수 없다
+ok 137 - 반환된 명단과 이력을 수정해 저장 내용을 바꿀 수 없다
+  ---
+  duration_ms: 0.9051
+  type: 'test'
+  ...
+# Subtest: 닫힌 저장소에서는 명단과 사유 API도 거부한다
+ok 138 - 닫힌 저장소에서는 명단과 사유 API도 거부한다
+  ---
+  duration_ms: 0.4529
+  type: 'test'
+  ...
+# Subtest: 재개방해도 원 출석과 사유 이력·면제가 유지된다
+ok 139 - 재개방해도 원 출석과 사유 이력·면제가 유지된다
+  ---
+  duration_ms: 120.9196
+  type: 'test'
+  ...
+# Subtest: 기존 출석 테이블 파일에 확인 이력 기능을 추가해도 기존 기록은 유지된다
+ok 140 - 기존 출석 테이블 파일에 확인 이력 기능을 추가해도 기존 기록은 유지된다
+  ---
+  duration_ms: 90.2693
+  type: 'test'
+  ...
+# Subtest: 동시 사유 수정에서는 한 요청만 성공하고 다른 요청은 재확인을 요구한다
+ok 141 - 동시 사유 수정에서는 한 요청만 성공하고 다른 요청은 재확인을 요구한다
+  ---
+  duration_ms: 237.2522
+  type: 'test'
+  ...
+1..141
+# tests 141
+# suites 0
+# pass 141
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1550.1984

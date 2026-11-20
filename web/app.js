@@ -1,18 +1,18 @@
-// AI-authored browser for the synthetic, in-memory laptop demo only.
+// AI-authored browser for the synthetic laptop demo only.
 const $ = id => document.getElementById(id);
 const names = { pending: '확인 전', unconfirmed: '미확인', present: '정상 출석',
     review_required: '지각 여부 확인', reason_confirmed: '사유 확인 · 출석 전', excused: '지각 면제' };
 const reasons = { reported_reason: '전달받은 사유', outing: '외출 중', outing_return: '복귀 직후 확인' };
 const actions = { confirm_reason: '사유 확인', clear_reason: '사유 확인 취소', waive_lateness: '지각 면제' };
 const time = value => value ? new Intl.DateTimeFormat('ko-KR', { timeZone: 'Asia/Seoul', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' }).format(new Date(value)) : '—';
-let latest, busy = false, selected, auditStudent, toastTimer;
+let latest, busy = false, selected, auditStudent, toastTimer, sessionId;
 function toast(message) {
     $('toast').textContent = message; $('toast').classList.add('visible');
     clearTimeout(toastTimer); toastTimer = setTimeout(() => $('toast').classList.remove('visible'), 4500);
 }
 async function api(path, data) {
     const response = await fetch(path, data === undefined ? { cache: 'no-store' } : {
-        method: 'POST', headers: { 'Content-Type': 'application/json', 'X-FingerRoll-Demo': '1' }, body: JSON.stringify(data) });
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'X-FingerRoll-Demo': '1', 'X-FingerRoll-Session': sessionId ?? '' }, body: JSON.stringify(data) });
     const result = await response.json();
     if (!response.ok) throw new Error(result.error ?? '요청을 완료하지 못했습니다.');
     return result;
@@ -22,6 +22,13 @@ function button(text, handler, style = 'secondary') {
     element.disabled = busy; element.addEventListener('click', handler); return element;
 }
 function render(data) {
+    if (sessionId && sessionId !== data.sessionId) {
+        latest = undefined; selected = undefined; auditStudent = undefined;
+        $('reason-dialog').close(); $('history').replaceChildren();
+        $('audit-label').textContent = '새 연습입니다. 학생의 ‘이력’을 눌러 확인해주세요.';
+        toast('새 연습 세션을 불러왔습니다. 이전 화면의 작업은 다시 확인해주세요.');
+    }
+    sessionId = data.sessionId;
     if (latest && Date.parse(data.summary.asOf) < Date.parse(latest.asOf)) return;
     const focused = document.activeElement?.closest('#roster button');
     const restore = focused && { id: focused.closest('tr').firstChild.textContent, text: focused.textContent };
@@ -64,7 +71,10 @@ function render(data) {
         target?.focus({ preventScroll: true });
     }
     $('advance').disabled = busy || !data.clockRunning;
-    $('connection').textContent = `● 노트북 데모 연결됨 · ${time(latest.asOf)} 갱신${data.clockRunning ? '' : ' · 가상 하루가 끝났습니다. 다시 시작하려면 서버를 재실행하세요.'}`;
+    $('storage-note').textContent = data.persistent
+        ? '가상 출석·사유·시계는 이 노트북에 자동 저장됩니다. 다시 켜도 이어서 확인할 수 있어요.'
+        : '일회성 메모리 데모입니다. 이 실행의 가상 기록은 종료하면 사라집니다.';
+    $('connection').textContent = `● 노트북 데모 연결됨 · ${time(latest.asOf)} 갱신${data.clockRunning ? '' : ' · 가상 하루가 끝났습니다. 새 연습을 시작하려면 사용 안내를 확인하세요.'}`;
 }
 async function refresh() {
     if (busy) return;

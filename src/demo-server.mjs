@@ -2,6 +2,7 @@
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { openAttendanceStore } from './daily-attendance.mjs';
+import { openDemoClock } from './demo-clock.mjs';
 
 const day = '2026-11-18';
 const ids = Object.freeze(['S001', 'S002', 'S003', 'S004']);
@@ -10,19 +11,18 @@ const assets = new Map([
     ['/app.js', ['app.js', 'text/javascript; charset=utf-8']],
     ['/style.css', ['style.css', 'text/css; charset=utf-8']],
 ]);
-const end = Date.parse(`${day}T23:59:59.999+09:00`);
 
-export async function startDemoServer({ port = 0, now = () => performance.now() } = {}) {
-    const store = openAttendanceStore(':memory:');
-    const started = now();
-    let base = Date.parse(`${day}T18:24:00+09:00`);
-    let anchor = started;
-    const clock = () => Math.min(end, base + Math.max(0, now() - anchor));
-    const timestamp = () => new Date(clock()).toISOString();
-    const summary = () => ({ syntheticOnly: true, clockRunning: clock() < end,
-        summary: store.getRosterSummary({ attendanceDate: day, expectedStudentIds: ids, asOf: timestamp() }) });
+export async function startDemoServer({ port = 0, now = () => performance.now(), databasePath = ':memory:' } = {}) {
     const staticFiles = new Map(await Promise.all([...assets].map(async ([route, [file, type]]) =>
         [route, { body: await readFile(new URL(`../web/${file}`, import.meta.url)), type }])));
+    const clock = openDemoClock(databasePath, now);
+    let store;
+    try { store = openAttendanceStore(databasePath); }
+    catch (error) { clock.close(); throw error; }
+    const timestamp = () => new Date(clock.checkpoint()).toISOString();
+    const summary = () => ({ syntheticOnly: true, sessionId: clock.sessionId, persistent: databasePath !== ':memory:',
+        clockRunning: clock.running,
+        summary: store.getRosterSummary({ attendanceDate: day, expectedStudentIds: ids, asOf: timestamp() }) });
     let origin;
     function fail(message, status = 400, code) { throw Object.assign(new Error(message), { status, code }); }
     function fields(value, allowed) {
@@ -57,6 +57,9 @@ export async function startDemoServer({ port = 0, now = () => performance.now() 
             if (request.method !== 'POST') return send(405, { error: '지원하지 않는 요청입니다.' });
             if (request.headers.origin !== origin || request.headers['x-fingerroll-demo'] !== '1' ||
                 request.headers['content-type'] !== 'application/json') fail('데모 화면에서 다시 시도해주세요.', 403);
+            if (request.headers['x-fingerroll-session'] !== clock.sessionId) {
+                fail('연습 세션이 바뀌었습니다. 최신 화면을 확인한 뒤 다시 시도해주세요.', 409, 'STALE_SESSION');
+            }
             if (!['/api/scan', '/api/review', '/api/clock'].includes(url.pathname) || url.search) {
                 return send(404, { error: '없는 기능입니다.' });
             }
@@ -76,8 +79,7 @@ export async function startDemoServer({ port = 0, now = () => performance.now() 
                 if (!Number.isSafeInteger(input.advanceSeconds) || input.advanceSeconds < 1 || input.advanceSeconds > 3600) {
                     fail('가상 시계는 1~3600초 앞으로만 이동할 수 있습니다.');
                 }
-                base = Math.min(end, clock() + input.advanceSeconds * 1000);
-                anchor = now();
+                clock.advance(input.advanceSeconds);
             } else if (url.pathname === '/api/scan') {
                 fields(input, ['studentId']);
                 student(input.studentId);
@@ -90,7 +92,7 @@ export async function startDemoServer({ port = 0, now = () => performance.now() 
             return send(200, { ...summary(), result });
         } catch (error) {
             send(error.code === 'STALE_REVIEW' ? 409 : error.status ?? 400,
-                { error: error.message, ...(error.code === 'STALE_REVIEW' ? { code: error.code } : {}) });
+                { error: error.message, ...(['STALE_REVIEW', 'STALE_SESSION'].includes(error.code) ? { code: error.code } : {}) });
         }
     });
     server.requestTimeout = 10000;
@@ -101,9 +103,12 @@ export async function startDemoServer({ port = 0, now = () => performance.now() 
             server.listen(port, '127.0.0.1', resolve);
         });
         origin = `http://127.0.0.1:${server.address().port}`;
-    } catch (error) { store.close(); throw error; }
-    return { url: origin, async close() {
-        await new Promise((resolve, reject) => server.close(error => error ? reject(error) : resolve()));
-        store.close();
+    } catch (error) { store.close(); clock.close(); throw error; }
+    let closing;
+    return { url: origin, sessionId: clock.sessionId, close() {
+        return closing ??= (async () => {
+            await new Promise((resolve, reject) => server.close(error => error ? reject(error) : resolve()));
+            try { store.close(); } finally { clock.close(); }
+        })();
     } };
 }

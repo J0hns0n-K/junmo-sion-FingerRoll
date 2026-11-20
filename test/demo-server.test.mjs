@@ -9,7 +9,7 @@ async function fixture(t) {
     t.after(() => app.close());
     const raw = (path, options) => fetch(app.url + path, options);
     const post = (path, body, headers = {}) => raw(path, { method: 'POST', headers: {
-        Origin: app.url, 'Content-Type': 'application/json', 'X-FingerRoll-Demo': '1', ...headers,
+        Origin: app.url, 'Content-Type': 'application/json', 'X-FingerRoll-Demo': '1', 'X-FingerRoll-Session': app.sessionId, ...headers,
     }, body: JSON.stringify(body) });
     const state = async () => (await raw('/api/state')).json();
     const advance = ms => { ticks += ms; };
@@ -121,7 +121,7 @@ test('forged Host and unsupported requests are rejected', async t => {
 });
 test('malformed, oversized and non-object JSON are rejected', async t => {
     const f = await fixture(t);
-    const headers = { Origin: f.url, 'Content-Type': 'application/json', 'X-FingerRoll-Demo': '1' };
+    const headers = { Origin: f.url, 'Content-Type': 'application/json', 'X-FingerRoll-Demo': '1', 'X-FingerRoll-Session': f.sessionId };
     assert.equal((await f.raw('/api/scan', { method: 'POST', headers, body: '{' })).status, 400);
     assert.equal((await f.raw('/api/scan', { method: 'POST', headers, body: ' '.repeat(4097) })).status, 413);
     for (const input of [null, [], 'S001', 1]) assert.equal((await f.post('/api/scan', input)).status, 400);
@@ -141,4 +141,13 @@ test('a fresh server starts with no records or reason history', async t => {
     const second = await fixture(t);
     assert.equal((await second.state()).summary.counts.recorded, 0);
     assert.deepEqual(await (await second.raw('/api/history?studentId=S001')).json(), []);
+});
+test('a different or missing session cannot submit a stale browser action', async t => {
+    const f = await fixture(t);
+    for (const session of ['', 'old-session']) {
+        const response = await f.post('/api/scan', { studentId: 'S001' }, { 'X-FingerRoll-Session': session });
+        assert.equal(response.status, 409);
+        assert.equal((await response.json()).code, 'STALE_SESSION');
+    }
+    assert.equal((await f.state()).summary.counts.recorded, 0);
 });

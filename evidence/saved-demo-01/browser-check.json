@@ -1,0 +1,23 @@
+{
+  "operator": "AI assistant",
+  "method": "Manual UI through cua_repl; separate from automated tests",
+  "checkedAtUtc": "2026-11-18T09:10:57.804Z",
+  "harness": "node evidence/saved-demo-01/browser-server.mjs",
+  "restart": "Stopped QA process and relaunched same harness without page reload",
+  "newPractice": "Stopped QA process and relaunched harness with --new-session while a reason dialog was open",
+  "beforeRestart": "가상 학생\t현재 상태\t첫 출석\t사유 확인\t작업\nS001\t정상 출석\t18:24:30\t확인 없음\t\n가상 출석\n사유 확인\n이력\n\nS002\t사유 확인 · 출석 전\t—\t전달받은 사유\t\n가상 출석\n사유 확인\n사유 취소\n이력\n\nS003\t지각 면제\t18:25:31\t복귀 직후 확인\t\n가상 출석\n사유 확인\n사유 취소\n이력\n\nS004\t미확인\t—\t확인 없음\t\n가상 출석\n사유 확인\n이력",
+  "afterRestart": "가상 학생\t현재 상태\t첫 출석\t사유 확인\t작업\nS001\t정상 출석\t18:24:30\t확인 없음\t\n가상 출석\n사유 확인\n이력\n\nS002\t사유 확인 · 출석 전\t—\t전달받은 사유\t\n가상 출석\n사유 확인\n사유 취소\n이력\n\nS003\t지각 면제\t18:25:31\t복귀 직후 확인\t\n가상 출석\n사유 확인\n사유 취소\n이력\n\nS004\t미확인\t—\t확인 없음\t\n가상 출석\n사유 확인\n이력",
+  "rosterUnchanged": true,
+  "clockBefore": "18:25:38",
+  "clockAfter": "18:25:59",
+  "restoredAudit": "18:25:38 · 사유 확인 / 복귀 직후 확인 · 이력 #2\n18:25:38 · 지각 면제 · 이력 #3",
+  "newPracticeRoster": "가상 학생\t현재 상태\t첫 출석\t사유 확인\t작업\nS001\t확인 전\t—\t확인 없음\t\n가상 출석\n사유 확인\n이력\n\nS002\t확인 전\t—\t확인 없음\t\n가상 출석\n사유 확인\n이력\n\nS003\t확인 전\t—\t확인 없음\t\n가상 출석\n사유 확인\n이력\n\nS004\t확인 전\t—\t확인 없음\t\n가상 출석\n사유 확인\n이력",
+  "newPracticeClock": "18:24:20",
+  "newPracticeCount": "0 / 4",
+  "previousDialogClosed": true,
+  "limitations": [
+    "Only fake IDs and simulated date/time; no real students, fingerprint hardware or notifications",
+    "CLI stop via tool reports process exit; committed writes and browser-visible restoration were observed",
+    "Retained database bytes and stale-session POST rejection are tested in automated integration tests"
+  ]
+}
