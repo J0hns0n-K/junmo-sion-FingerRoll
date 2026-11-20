@@ -1,0 +1,13 @@
+{
+  "operator": "AI assistant",
+  "baseRevision": "f0dc392e8db8d8ae20476e253466d275cd0609ca",
+  "sourceIdentity": "Exact source hashes in result.json; containing commit binds source and evidence",
+  "sha256": {
+    "browser-check.json": "991cd36c69485ccb8b8dc63e07fc0a0df27ae81c909d07f7ab573a043fac38b7",
+    "browser-server.mjs": "44009c9a164a3061bbaedfed39740be38f366f42acfde83be09705c0488f275d",
+    "preview-result.jpg": "13b877a3a922ebe691b01758a10b620c9e8ec5d096e41a48c8e60f25238ea969",
+    "result.json": "a75ec3fbcc72a56e65235da67afb8f8b881ec26ddad44f9290e24b3d22b71fc6",
+    "run-01.tap": "8ca0c12572b89499a1eefbdf43c163ef426c128b59eedc84f5b0ffcbdececd87",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

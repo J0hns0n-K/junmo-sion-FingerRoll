@@ -49,8 +49,10 @@ node scripts/demo-web.mjs --new-session
 
 ## 검증 근거
 
+현재는 [상황 확인용 알림 미리보기](NOTIFICATION_PREVIEW.md)까지 포함해 **152개 통과·실패 0개**다. [현재 실행 기록](../evidence/notification-preview-01/result.json). 아래 141개는 저장형 화면 시점의 기록으로 보존한다. 명단 아래 ‘미리보기 열기’로 확인할 수 있고, 실제 전송 기능은 없다.
+
 ```powershell
-node --test --test-reporter=tap practice/task-001a.test.mjs practice/task-001a.validation.test.mjs test/daily-attendance.test.mjs test/roster.test.mjs test/demo-server.test.mjs test/persistent-demo.test.mjs
+node --test --test-reporter=tap practice/task-001a.test.mjs practice/task-001a.validation.test.mjs test/daily-attendance.test.mjs test/roster.test.mjs test/demo-server.test.mjs test/persistent-demo.test.mjs test/notification-preview.test.mjs
 ```
 
 기존 132개와 저장형 검사 9개를 합해 **141개 통과·실패 0개**다. [현재 명령·환경·정확한 소스 해시](../evidence/saved-demo-01/result-02.json), [현재 원 출력](../evidence/saved-demo-01/run-02.tap). 2026-11-18 Node v24.22.1의 [첫 검사](../evidence/saved-demo-01/result.json)와 2026-11-20 Node v24.22.3에서 같은 소스를 다시 확인한 결과를 모두 보존한다. 두 실행의 검사 수를 합산하지 않는다. 재시작 시 출석·사유·면제·시계 복원, 이전 인식 보존, 출석 없는 사유 확인 유지, 정상 종료 없는 프로세스 종료 후 커밋된 기록 복원, 새 연습의 이전 파일 보존, 시작 실패 시 연결 유지, 손상된 연결 거부, 시계 역행 방지와 이전 세션 요청 거부를 포함한다. 강제 프로세스 종료 검사는 장치 전원 상실·디스크 고장·운영용 백업 복구 검증이 아니다.

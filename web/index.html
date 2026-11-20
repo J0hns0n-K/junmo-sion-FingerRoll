@@ -16,6 +16,7 @@
       <div class="table-wrap"><table><thead><tr><th scope="col">가상 학생</th><th scope="col">현재 상태</th><th scope="col">첫 출석</th><th scope="col">사유 확인</th><th scope="col">작업</th></tr></thead><tbody id="roster"></tbody></table></div>
       <p class="table-note">출석은 자정부터 언제든 받습니다. 2·3교시에는 별도로 출석을 요구하지 않습니다.</p>
     </section>
+    <section class="notification-panel" aria-labelledby="notification-title"><div class="notification-heading"><div><h2 id="notification-title">알림 미리보기</h2><p>사생회에 알리기 전, 미확인 학생의 상황을 먼저 확인하세요.</p></div><button id="preview-open" class="secondary" aria-expanded="false" aria-controls="preview-output" disabled>미리보기 열기</button></div><div id="preview-output" hidden><p id="preview-status" role="status"></p><p id="preview-counts"></p><pre id="preview-message"></pre><p id="preview-time"></p><p class="preview-limit">검토 전용 · 수신자 미지정 · 실제 전송 기능 없음<br>사유가 확인된 학생의 상세 내용과 출석한 학생의 명단은 문안에 넣지 않습니다.</p></div></section>
     <section class="bottom-grid"><div class="guide"><h2>이렇게 확인해요</h2><ol><li><b>가상 출석</b>으로 인식을 흉내 내보세요. 다시 눌러도 첫 시각을 유지해요.</li><li>따로 전달받은 사유나 외출 복귀를 <b>사유 확인</b>에 남기세요.</li><li>늦은 출석의 사유를 확인한 뒤 <b>지각 면제</b>를 결정하세요.</li></ol><p>기록이 없으면 미확인입니다. 학생이나 사감 선생님을 통해 상황을 확인하세요.</p></div><div class="audit"><h2>확인 이력</h2><p id="audit-label">학생의 ‘이력’을 누르면 사유 변경을 볼 수 있어요.</p><ul id="history"></ul></div></section>
     <footer>합성 학생 4명만 사용 · 실제 지문·학생 정보·알림 전송 없음<br>학교 운영용 로그인과 권한은 아직 준비되지 않았습니다. 이 화면에 실제 정보를 입력하지 마세요.</footer>
   </main>

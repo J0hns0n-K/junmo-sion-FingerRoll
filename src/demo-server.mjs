@@ -3,6 +3,7 @@ import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { openAttendanceStore } from './daily-attendance.mjs';
 import { openDemoClock } from './demo-clock.mjs';
+import { createNotificationPreview } from './notification-preview.mjs';
 
 const day = '2026-11-18';
 const ids = Object.freeze(['S001', 'S002', 'S003', 'S004']);
@@ -20,9 +21,11 @@ export async function startDemoServer({ port = 0, now = () => performance.now(),
     try { store = openAttendanceStore(databasePath); }
     catch (error) { clock.close(); throw error; }
     const timestamp = () => new Date(clock.checkpoint()).toISOString();
-    const summary = () => ({ syntheticOnly: true, sessionId: clock.sessionId, persistent: databasePath !== ':memory:',
-        clockRunning: clock.running,
-        summary: store.getRosterSummary({ attendanceDate: day, expectedStudentIds: ids, asOf: timestamp() }) });
+    const summary = () => {
+        const snapshot = store.getRosterSummary({ attendanceDate: day, expectedStudentIds: ids, asOf: timestamp() });
+        return { syntheticOnly: true, sessionId: clock.sessionId, persistent: databasePath !== ':memory:',
+            clockRunning: clock.running, summary: snapshot, notificationPreview: createNotificationPreview(snapshot) };
+    };
     let origin;
     function fail(message, status = 400, code) { throw Object.assign(new Error(message), { status, code }); }
     function fields(value, allowed) {

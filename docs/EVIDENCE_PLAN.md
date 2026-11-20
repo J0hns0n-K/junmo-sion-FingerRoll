@@ -33,6 +33,7 @@ GitHub 계정·커밋 수는 학생 저자성의 충분한 증거가 아니다. 
 | C003 | 센서로 학생을 식별하고 출석을 기록했다 | 미검증·사용 불가 | 승인된 장치 실험, 조건·반복 수·실패 원자료 |
 | C004 | 실제 학교에 도입하거나 시간을 절감했다 | 미검증·사용 불가 | 승인된 운영 기록, 분모·대조 조건·측정 방법 |
 | C005 | 미확인 명단과 사유 확인·면제 흐름을 검증했다 | AI가 로컬 합성 API·화면·세션 복원 확인 완료. 학생 직접 구현·운영 주장으로는 사용 불가 | [API 범위](ROSTER_REVIEW.md), [화면·저장·한계](LOCAL_DEMO.md), [141개 전체 검사와 소스 해시](../evidence/saved-demo-01/result-02.json), [별도 브라우저 복원 확인](../evidence/saved-demo-01/browser-check.json); 인증·센서·실제 학교 미검증 |
+| C006 | 상황 확인용 알림 문안의 최소 정보·갱신을 검증했다 | AI가 로컬 합성 미리보기 검사 완료. 실제 발송·수신·학생 구현 주장으로는 사용 불가 | [미리보기 범위](NOTIFICATION_PREVIEW.md), [152개 전체 검사·소스 해시](../evidence/notification-preview-01/result.json), [별도 브라우저 확인](../evidence/notification-preview-01/browser-check.json); 수신자 승인·인증·전송 큐·실제 메시지는 미구현 |
 
 ## Engineering Report 작성 틀
 

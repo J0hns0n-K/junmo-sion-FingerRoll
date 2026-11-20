@@ -1,0 +1,24 @@
+{
+  "operator": "AI assistant",
+  "method": "Manual browser UI through cua_repl; separate from automated test count",
+  "checkedAtUtc": "2026-11-20T10:35:51.079Z",
+  "harness": "node evidence/notification-preview-01/browser-server.mjs",
+  "beforeReviewStatus": "18:25부터 미확인 명단을 검토할 수 있습니다. 출석은 지금도 가능합니다.",
+  "twoCandidateMessage": "[가상 데모 · 2026-11-18 야자 1교시 출석 확인]\n상황 확인이 필요한 가상 학생: S003, S004\n현재 출석 기록과 확인된 사유가 없어 학생이나 사감 선생님을 통한 상황 확인이 필요합니다.\n결석 확정이 아닙니다. 누락된 출석·사유와 인식 장애 여부를 먼저 확인해주세요.\n검토용 미리보기이며 전송하지 않았습니다.",
+  "afterLateScanMessage": "[가상 데모 · 2026-11-18 야자 1교시 출석 확인]\n상황 확인이 필요한 가상 학생: S004\n현재 출석 기록과 확인된 사유가 없어 학생이나 사감 선생님을 통한 상황 확인이 필요합니다.\n결석 확정이 아닙니다. 누락된 출석·사유와 인식 장애 여부를 먼저 확인해주세요.\n검토용 미리보기이며 전송하지 않았습니다.",
+  "afterReasonStatus": "현재 상황 확인 문안에 넣을 미확인 학생이 없습니다.",
+  "noCandidateMessageHidden": true,
+  "afterClearReasonMessage": "[가상 데모 · 2026-11-18 야자 1교시 출석 확인]\n상황 확인이 필요한 가상 학생: S004\n현재 출석 기록과 확인된 사유가 없어 학생이나 사감 선생님을 통한 상황 확인이 필요합니다.\n결석 확정이 아닙니다. 누락된 출석·사유와 인식 장애 여부를 먼저 확인해주세요.\n검토용 미리보기이며 전송하지 않았습니다.",
+  "disconnectedStatus": "연결이 끊겨 미리보기를 숨겼습니다. 다시 연결한 뒤 최신 명단을 확인해주세요.",
+  "disconnectedMessageEmpty": true,
+  "disconnectedButtonDisabled": true,
+  "layout": {
+    "pageWidth": 635,
+    "width": 635
+  },
+  "limitations": [
+    "Synthetic 2026-11-18 clock and fake IDs only",
+    "No sender, recipient approval, message transport or final absence classification",
+    "User session on port 4318 was not opened or modified"
+  ]
+}

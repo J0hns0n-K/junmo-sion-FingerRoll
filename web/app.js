@@ -5,7 +5,7 @@ const names = { pending: '확인 전', unconfirmed: '미확인', present: '정�
 const reasons = { reported_reason: '전달받은 사유', outing: '외출 중', outing_return: '복귀 직후 확인' };
 const actions = { confirm_reason: '사유 확인', clear_reason: '사유 확인 취소', waive_lateness: '지각 면제' };
 const time = value => value ? new Intl.DateTimeFormat('ko-KR', { timeZone: 'Asia/Seoul', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' }).format(new Date(value)) : '—';
-let latest, busy = false, selected, auditStudent, toastTimer, sessionId;
+let latest, busy = false, selected, auditStudent, toastTimer, sessionId, latestPreview, previewVisible = false;
 function toast(message) {
     $('toast').textContent = message; $('toast').classList.add('visible');
     clearTimeout(toastTimer); toastTimer = setTimeout(() => $('toast').classList.remove('visible'), 4500);
@@ -26,6 +26,7 @@ function render(data) {
         latest = undefined; selected = undefined; auditStudent = undefined;
         $('reason-dialog').close(); $('history').replaceChildren();
         $('audit-label').textContent = '새 연습입니다. 학생의 ‘이력’을 눌러 확인해주세요.';
+        latestPreview = undefined; previewVisible = false;
         toast('새 연습 세션을 불러왔습니다. 이전 화면의 작업은 다시 확인해주세요.');
     }
     sessionId = data.sessionId;
@@ -33,6 +34,8 @@ function render(data) {
     const focused = document.activeElement?.closest('#roster button');
     const restore = focused && { id: focused.closest('tr').firstChild.textContent, text: focused.textContent };
     latest = data.summary;
+    latestPreview = data.notificationPreview;
+    renderPreview();
     $('clock').textContent = time(latest.asOf);
     $('recorded').replaceChildren(document.createTextNode(`${latest.counts.recorded} `), Object.assign(document.createElement('small'), { textContent: '/ 4' }));
     $('confirmed').textContent = latest.counts.present + latest.counts.excused;
@@ -79,7 +82,7 @@ function render(data) {
 async function refresh() {
     if (busy) return;
     try { const result = await api('/api/state'); if (!busy) render(result); }
-    catch { $('connection').textContent = '연결이 끊겼습니다. 화면이 최신 상태가 아니니 출석·미확인을 판단하지 마세요.'; }
+    catch { $('connection').textContent = '연결이 끊겼습니다. 화면이 최신 상태가 아니니 출석·미확인을 판단하지 마세요.'; invalidatePreview(); }
 }
 async function mutate(path, input, message) {
     if (busy) return;
@@ -91,7 +94,7 @@ async function mutate(path, input, message) {
         return true;
     } catch (error) {
         busy = false; toast(error.message);
-        try { render(await api('/api/state')); } catch { $('connection').textContent = '연결이 끊겼습니다. 최신 명단을 확인할 수 없습니다.'; }
+        try { render(await api('/api/state')); } catch { $('connection').textContent = '연결이 끊겼습니다. 최신 명단을 확인할 수 없습니다.'; invalidatePreview(); }
         return false;
     } finally { document.querySelectorAll('#reason-dialog button').forEach(item => { item.disabled = false; }); }
 }
@@ -106,6 +109,30 @@ async function showHistory(studentId) {
         if (!events.length) $('history').append(Object.assign(document.createElement('li'), { textContent: '아직 확인 이력이 없습니다.' }));
     } catch (error) { $('history').replaceChildren(); toast(error.message); }
 }
+function renderPreview() {
+    const preview = latestPreview;
+    $('preview-open').disabled = busy || !preview;
+    $('preview-open').textContent = previewVisible ? '미리보기 닫기' : '미리보기 열기';
+    $('preview-open').setAttribute('aria-expanded', String(previewVisible));
+    $('preview-output').hidden = !previewVisible;
+    if (!preview || !previewVisible) return;
+    $('preview-status').textContent = preview.phase === 'before_review'
+        ? '18:25부터 미확인 명단을 검토할 수 있습니다. 출석은 지금도 가능합니다.'
+        : preview.phase === 'nothing_to_check' ? '현재 상황 확인 문안에 넣을 미확인 학생이 없습니다.'
+            : `상황 확인 후보 ${preview.counts.candidates}명입니다. 결석 통보가 아닙니다.`;
+    $('preview-counts').textContent = `문안 제외: 출석 기록 ${preview.counts.recorded}명 · 사유 확인 후 출석 대기 ${preview.counts.reasonConfirmedAwaitingCheckIn}명`;
+    $('preview-message').textContent = preview.message ?? '';
+    $('preview-message').hidden = !preview.message;
+    $('preview-time').textContent = `${preview.attendanceDate} ${time(preview.asOf)} 기준 · 가상 시계 · 명단과 함께 갱신`;
+}
+function invalidatePreview() {
+    latestPreview = undefined;
+    $('preview-open').disabled = true;
+    $('preview-status').textContent = '연결이 끊겨 미리보기를 숨겼습니다. 다시 연결한 뒤 최신 명단을 확인해주세요.';
+    $('preview-counts').textContent = ''; $('preview-message').textContent = '';
+    $('preview-message').hidden = true; $('preview-time').textContent = '';
+}
+$('preview-open').addEventListener('click', () => { previewVisible = !previewVisible; renderPreview(); });
 $('advance').addEventListener('click', () => mutate('/api/clock', { advanceSeconds: 60 }, () => '가상 시계를 1분 앞으로 옮겼습니다.'));
 $('cancel-reason').addEventListener('click', () => $('reason-dialog').close());
 $('reason-form').addEventListener('submit', async event => {
